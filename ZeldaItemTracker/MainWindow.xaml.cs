@@ -11,40 +11,13 @@ namespace ZeldaItemTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<LocationNotes> _locationNotes;
+        internal List<LocationNotes> _locationNotes;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _locationNotes = new List<LocationNotes>
-            {
-                new LocationNotes
-                {
-                    LocationName = "WOTH 1",
-                    Items = ""
-                },
-                new LocationNotes
-                {
-                    LocationName = "WOTH 2",
-                    Items = ""
-                },
-                new LocationNotes
-                {
-                    LocationName = "WOTH 3",
-                    Items = ""
-                },
-                new LocationNotes
-                {
-                    LocationName = "WOTH 4",
-                    Items = ""
-                },
-                new LocationNotes
-                {
-                    LocationName = "WOTH 5",
-                    Items = ""
-                }
-            };
+            _locationNotes = NotesManager.BaseLocationNotes;
 
             foreach (var locationNote in _locationNotes)
             {
@@ -123,7 +96,7 @@ namespace ZeldaItemTracker
 
         private void Woth1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var fullName = GetFullName(Woth1.Text);
+            var fullName = NotesManager.GetFullName(Woth1.Text);
 
             _locationNotes[0].LocationName = fullName;
 
@@ -137,7 +110,7 @@ namespace ZeldaItemTracker
 
         private void Woth2_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var fullName = GetFullName(Woth2.Text);
+            var fullName = NotesManager.GetFullName(Woth2.Text);
 
             _locationNotes[1].LocationName = fullName;
 
@@ -151,7 +124,7 @@ namespace ZeldaItemTracker
 
         private void Woth3_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var fullName = GetFullName(Woth3.Text);
+            var fullName = NotesManager.GetFullName(Woth3.Text);
 
             _locationNotes[2].LocationName = fullName;
 
@@ -165,7 +138,7 @@ namespace ZeldaItemTracker
 
         private void Woth4_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var fullName = GetFullName(Woth4.Text);
+            var fullName = NotesManager.GetFullName(Woth4.Text);
 
             _locationNotes[3].LocationName = fullName;
 
@@ -179,7 +152,7 @@ namespace ZeldaItemTracker
 
         private void Woth5_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var fullName = GetFullName(Woth5.Text);
+            var fullName = NotesManager.GetFullName(Woth5.Text);
 
             _locationNotes[4].LocationName = fullName;
 
@@ -193,52 +166,52 @@ namespace ZeldaItemTracker
 
         private void Barren1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Barren1.Text = GetFullName(Barren1.Text);
+            Barren1.Text = NotesManager.GetFullName(Barren1.Text);
         }
 
         private void Barren2_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Barren2.Text = GetFullName(Barren2.Text);
+            Barren2.Text = NotesManager.GetFullName(Barren2.Text);
         }
 
         private void Barren3_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Barren3.Text = GetFullName(Barren3.Text);
+            Barren3.Text = NotesManager.GetFullName(Barren3.Text);
         }
 
         private void Frogs2_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Frogs2.Text = GetFullName(Frogs2.Text);
+            Frogs2.Text = NotesManager.GetFullName(Frogs2.Text);
         }
 
         private void OOT_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OOT.Text = GetFullName(OOT.Text);
+            OOT.Text = NotesManager.GetFullName(OOT.Text);
         }
 
         private void Skulls50_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Skulls50.Text = GetFullName(Skulls50.Text);
+            Skulls50.Text = NotesManager.GetFullName(Skulls50.Text);
         }
 
         private void Skulls40_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Skulls40.Text = GetFullName(Skulls40.Text);
+            Skulls40.Text = NotesManager.GetFullName(Skulls40.Text);
         }
 
         private void Skulls30_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Skulls30.Text = GetFullName(Skulls30.Text);
+            Skulls30.Text = NotesManager.GetFullName(Skulls30.Text);
         }
 
         private void Biggoron_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Biggoron.Text = GetFullName(Biggoron.Text);
+            Biggoron.Text = NotesManager.GetFullName(Biggoron.Text);
         }
 
         private void SkullMask_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SkullMask.Text = GetFullName(SkullMask.Text);
+            SkullMask.Text = NotesManager.GetFullName(SkullMask.Text);
         }
 
         private void ReprintNotes()
@@ -276,24 +249,6 @@ namespace ZeldaItemTracker
             WothItems.TextChanged += WothItems_TextChanged;
         }
 
-        private string GetFullName(string abbreviation)
-        {
-            if (LocationNames.LocationNameMaps.TryGetValue(abbreviation, out var locationName))
-            {
-                return locationName;
-            }
-
-            if (ItemNames.ItemNameMaps.TryGetValue(abbreviation, out var itemName))
-            {
-                return itemName;
-            }
-
-            if (SongNames.SongNameMaps.TryGetValue(abbreviation, out var songName))
-            {
-                return songName;
-            }
-
-            return abbreviation;
-        }
+       
     }
 }
