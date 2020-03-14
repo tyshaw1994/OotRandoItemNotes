@@ -27,7 +27,8 @@ namespace ZeldaItemTracker
             { "rl", "Ruto's Letter" },
             { "ss", "Silver Scale" },
             { "gs", "Gold Scale" },
-
+            { "lot", "Lens of Truth" },
+            { "fw", "Farore's Wind" }
         };
     }
 }

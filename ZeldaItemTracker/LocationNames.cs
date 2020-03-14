@@ -35,7 +35,7 @@ namespace ZeldaItemTracker
             { "dmc", "Death Mountain Crater" },
             { "gc", "Goron City" },
             { "dt", "Deku Tree" },
-            { "dcvn", "Dodongo's Cavern" },
+            { "dong", "Dodongo's Cavern" },
             { "jabu", "Jabu Jabu's Belly" },
             { "fot", "Forest Temple" },
             { "fit", "Fire Temple" },
@@ -45,7 +45,7 @@ namespace ZeldaItemTracker
             { "ic", "Ice Cavern" },
             { "botw", "Bottom of the Well" },
             { "gtg", "Gerudo Training Grounds" },
-            { "gcastle", "Ganon's Castle" }
+            { "ganon", "Ganon's Castle" }
         };
     }
 }
