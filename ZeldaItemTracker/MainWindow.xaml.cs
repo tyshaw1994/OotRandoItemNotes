@@ -49,18 +49,13 @@ namespace ZeldaItemTracker
             Woth2.TextChanged += Woth2_TextChanged;
             Woth3.TextChanged += Woth3_TextChanged;
             Woth4.TextChanged += Woth4_TextChanged;
-            Woth5.TextChanged += Woth5_TextChanged;
 
-            Barren1.TextChanged += Barren1_TextChanged;
-            Barren2.TextChanged += Barren2_TextChanged;
-            Barren3.TextChanged += Barren3_TextChanged;
-
-            SkullMask.TextChanged += SkullMask_TextChanged;
+            OOTItem.TextChanged += OOTItem_TextChanged;
             Biggoron.TextChanged += Biggoron_TextChanged;
             Skulls30.TextChanged += Skulls30_TextChanged;
             Skulls40.TextChanged += Skulls40_TextChanged;
             Skulls50.TextChanged += Skulls50_TextChanged;
-            OOT.TextChanged += OOT_TextChanged;
+            OOTSong.TextChanged += OOTSong_TextChanged;
             Frogs2.TextChanged += Frogs2_TextChanged;
 
             WothItems.TextChanged += WothItems_TextChanged;
@@ -150,43 +145,14 @@ namespace ZeldaItemTracker
             Woth4.Text = fullName;
         }
 
-        private void Woth5_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth5.Text);
-
-            _locationNotes[4].LocationName = fullName;
-
-            if (fullName != Woth5.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth5.Text = fullName;
-        }
-
-        private void Barren1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Barren1.Text = NotesManager.GetFullName(Barren1.Text);
-        }
-
-        private void Barren2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Barren2.Text = NotesManager.GetFullName(Barren2.Text);
-        }
-
-        private void Barren3_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Barren3.Text = NotesManager.GetFullName(Barren3.Text);
-        }
-
         private void Frogs2_TextChanged(object sender, TextChangedEventArgs e)
         {
             Frogs2.Text = NotesManager.GetFullName(Frogs2.Text);
         }
 
-        private void OOT_TextChanged(object sender, TextChangedEventArgs e)
+        private void OOTSong_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OOT.Text = NotesManager.GetFullName(OOT.Text);
+            OOTSong.Text = NotesManager.GetFullName(OOTSong.Text);
         }
 
         private void Skulls50_TextChanged(object sender, TextChangedEventArgs e)
@@ -209,9 +175,9 @@ namespace ZeldaItemTracker
             Biggoron.Text = NotesManager.GetFullName(Biggoron.Text);
         }
 
-        private void SkullMask_TextChanged(object sender, TextChangedEventArgs e)
+        private void OOTItem_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SkullMask.Text = NotesManager.GetFullName(SkullMask.Text);
+            OOTItem.Text = NotesManager.GetFullName(OOTItem.Text);
         }
 
         private void ReprintNotes()
