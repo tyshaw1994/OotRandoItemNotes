@@ -7,8 +7,686 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="blue_note-check.png" />
+    <None Remove="blue_note-disabledcheck.png" />
+    <None Remove="blue_note.png" />
+    <None Remove="bomb-disabled.png" />
+    <None Remove="bomb.png" />
+    <None Remove="bomb2.png" />
+    <None Remove="bomb3.png" />
+    <None Remove="bomb4.png" />
+    <None Remove="bombchu.png" />
+    <None Remove="boomerang-disabled.png" />
+    <None Remove="boomerang.png" />
+    <None Remove="boots.png" />
+    <None Remove="bottle-letter.png" />
+    <None Remove="bottle.png" />
+    <None Remove="bow.png" />
+    <None Remove="bow3.png" />
+    <None Remove="bow4.png" />
+    <None Remove="bow5.png" />
+    <None Remove="deku.png" />
+    <None Remove="din.png" />
+    <None Remove="dodongo.png" />
+    <None Remove="emerald-small.png" />
+    <None Remove="emerald.png" />
+    <None Remove="epona-check.png" />
+    <None Remove="epona-disabledcheck.png" />
+    <None Remove="epona.png" />
+    <None Remove="fire-small.png" />
+    <None Remove="fireandlightarrows.png" />
+    <None Remove="firearrow.png" />
+    <None Remove="firemedallion.png" />
+    <None Remove="forest-small.png" />
+    <None Remove="forest.png" />
+    <None Remove="forestmedallion.png" />
+    <None Remove="free.png" />
+    <None Remove="green_note-check.png" />
+    <None Remove="green_note-disabledcheck.png" />
+    <None Remove="green_note.png" />
+    <None Remove="hammer.png" />
+    <None Remove="hookshotd.png" />
+    <None Remove="hoverboots.png" />
+    <None Remove="images\arrows-disabled.png" />
+    <None Remove="images\arrows.png" />
+    <None Remove="images\arrowsleft.png" />
+    <None Remove="images\arrowsright.png" />
+    <None Remove="images\blue_note-check.png" />
+    <None Remove="images\blue_note-disabled.png" />
+    <None Remove="images\blue_note-disabledcheck.png" />
+    <None Remove="images\blue_note.png" />
+    <None Remove="images\bomb-disabled.png" />
+    <None Remove="images\bomb.png" />
+    <None Remove="images\bomb2.png" />
+    <None Remove="images\bomb3.png" />
+    <None Remove="images\bomb4.png" />
+    <None Remove="images\bombchu.png" />
+    <None Remove="images\boomerang-disabled.png" />
+    <None Remove="images\boomerang.png" />
+    <None Remove="images\boots-disabled.png" />
+    <None Remove="images\boots.png" />
+    <None Remove="images\bootsleft.png" />
+    <None Remove="images\bootsright.png" />
+    <None Remove="images\bottle-disabled.png" />
+    <None Remove="images\bottle-letter.png" />
+    <None Remove="images\bottle.png" />
+    <None Remove="images\bottle2.png" />
+    <None Remove="images\bow-disabled.png" />
+    <None Remove="images\bow.png" />
+    <None Remove="images\bow2.png" />
+    <None Remove="images\bow3.png" />
+    <None Remove="images\bow4.png" />
+    <None Remove="images\bow5.png" />
+    <None Remove="images\deku.png" />
+    <None Remove="images\din-disabled.png" />
+    <None Remove="images\din.png" />
+    <None Remove="images\dodongo.png" />
+    <None Remove="images\emerald-disabled.png" />
+    <None Remove="images\emerald-small.png" />
+    <None Remove="images\emerald.png" />
+    <None Remove="images\epona-check.png" />
+    <None Remove="images\epona-disabled.png" />
+    <None Remove="images\epona-disabledcheck.png" />
+    <None Remove="images\epona.png" />
+    <None Remove="images\fire-small.png" />
+    <None Remove="images\fire.png" />
+    <None Remove="images\fireandlightarrows-disabled.png" />
+    <None Remove="images\fireandlightarrows.png" />
+    <None Remove="images\firearrow.png" />
+    <None Remove="images\firemedallion-disabled.png" />
+    <None Remove="images\firemedallion.png" />
+    <None Remove="images\forest-small.png" />
+    <None Remove="images\forest.png" />
+    <None Remove="images\forestmedallion-disabled.png" />
+    <None Remove="images\forestmedallion.png" />
+    <None Remove="images\free.png" />
+    <None Remove="images\green_note-check.png" />
+    <None Remove="images\green_note-disabled.png" />
+    <None Remove="images\green_note-disabledcheck.png" />
+    <None Remove="images\green_note.png" />
+    <None Remove="images\hammer-disabled.png" />
+    <None Remove="images\hammer.png" />
+    <None Remove="images\hookshot-disabled.png" />
+    <None Remove="images\hookshot.png" />
+    <None Remove="images\hookshot2.png" />
+    <None Remove="images\hookshotd.png" />
+    <None Remove="images\hoverboots.png" />
+    <None Remove="images\ironboots.png" />
+    <None Remove="images\jabu.png" />
+    <None Remove="images\lift-disabled.png" />
+    <None Remove="images\lift.png" />
+    <None Remove="images\lift1-disabled.png" />
+    <None Remove="images\lift1.png" />
+    <None Remove="images\lift2.png" />
+    <None Remove="images\lift3.png" />
+    <None Remove="images\light-small.png" />
+    <None Remove="images\lightarrow.png" />
+    <None Remove="images\lightmedallion-disabled.png" />
+    <None Remove="images\lightmedallion.png" />
+    <None Remove="images\longshot.png" />
+    <None Remove="images\mirror-disabled.png" />
+    <None Remove="images\mirror.png" />
+    <None Remove="images\orange_note-check.png" />
+    <None Remove="images\orange_note-disabled.png" />
+    <None Remove="images\orange_note-disabledcheck.png" />
+    <None Remove="images\orange_note.png" />
+    <None Remove="images\purple_note-check.png" />
+    <None Remove="images\purple_note-disabled.png" />
+    <None Remove="images\purple_note-disabledcheck.png" />
+    <None Remove="images\purple_note.png" />
+    <None Remove="images\red_note-check.png" />
+    <None Remove="images\red_note-disabled.png" />
+    <None Remove="images\red_note-disabledcheck.png" />
+    <None Remove="images\red_note.png" />
+    <None Remove="images\ruby-disabled.png" />
+    <None Remove="images\ruby-small.png" />
+    <None Remove="images\ruby.png" />
+    <None Remove="images\ruto.png" />
+    <None Remove="images\sapphire-disabled.png" />
+    <None Remove="images\sapphire.png" />
+    <None Remove="images\saria-check.png" />
+    <None Remove="images\saria-disabled.png" />
+    <None Remove="images\saria-disabledcheck.png" />
+    <None Remove="images\saria.png" />
+    <None Remove="images\scale-disabled.png" />
+    <None Remove="images\scale.png" />
+    <None Remove="images\scale1.png" />
+    <None Remove="images\scale2.png" />
+    <None Remove="images\shadow-small.png" />
+    <None Remove="images\shadow.png" />
+    <None Remove="images\shadowmedallion-disabled.png" />
+    <None Remove="images\shadowmedallion.png" />
+    <None Remove="images\shadowspirit.png" />
+    <None Remove="images\shield3.png" />
+    <None Remove="images\skulltula.png" />
+    <None Remove="images\skulltula1.png" />
+    <None Remove="images\skulltula2.png" />
+    <None Remove="images\skulltula3.png" />
+    <None Remove="images\skulltula4.png" />
+    <None Remove="images\skulltula5.png" />
+    <None Remove="images\sling-disabled.png" />
+    <None Remove="images\sling.png" />
+    <None Remove="images\sling2.png" />
+    <None Remove="images\sling3.png" />
+    <None Remove="images\sling4.png" />
+    <None Remove="images\sling5.png" />
+    <None Remove="images\slingshot.png" />
+    <None Remove="images\songofstorms-check.png" />
+    <None Remove="images\songofstorms-disabled.png" />
+    <None Remove="images\songofstorms-disabledcheck.png" />
+    <None Remove="images\songofstorms.png" />
+    <None Remove="images\songoftime-check.png" />
+    <None Remove="images\songoftime-disabled.png" />
+    <None Remove="images\songoftime-disabledcheck.png" />
+    <None Remove="images\songoftime.png" />
+    <None Remove="images\spirit-small.png" />
+    <None Remove="images\spirit.png" />
+    <None Remove="images\spiritmedallion-disabled.png" />
+    <None Remove="images\spiritmedallion.png" />
+    <None Remove="images\stones %281%29.png" />
+    <None Remove="images\stones.png" />
+    <None Remove="images\sunsong-check.png" />
+    <None Remove="images\sunsong-disabled.png" />
+    <None Remove="images\sunsong-disabledcheck.png" />
+    <None Remove="images\sunsong.png" />
+    <None Remove="images\unknown-small.png" />
+    <None Remove="images\water-small.png" />
+    <None Remove="images\water.png" />
+    <None Remove="images\watermedallion-disabled.png" />
+    <None Remove="images\watermedallion.png" />
+    <None Remove="images\yellow_note-check.png" />
+    <None Remove="images\yellow_note-disabled.png" />
+    <None Remove="images\yellow_note-disabledcheck.png" />
+    <None Remove="images\yellow_note.png" />
+    <None Remove="images\zelda-check.png" />
+    <None Remove="images\zelda-disabled.png" />
+    <None Remove="images\zelda-disabledcheck.png" />
+    <None Remove="images\zelda.png" />
+    <None Remove="ironboots.png" />
+    <None Remove="jabu.png" />
+    <None Remove="lift1.png" />
+    <None Remove="lift2.png" />
+    <None Remove="lift3.png" />
+    <None Remove="light-small.png" />
+    <None Remove="lightarrow.png" />
+    <None Remove="lightmedallion.png" />
+    <None Remove="longshot.png" />
+    <None Remove="orange_note-check.png" />
+    <None Remove="orange_note-disabledcheck.png" />
+    <None Remove="orange_note.png" />
+    <None Remove="purple_note-check.png" />
+    <None Remove="purple_note-disabledcheck.png" />
+    <None Remove="purple_note.png" />
+    <None Remove="red_note-check.png" />
+    <None Remove="red_note-disabledcheck.png" />
+    <None Remove="red_note.png" />
+    <None Remove="ruby-small.png" />
+    <None Remove="ruby.png" />
+    <None Remove="ruto.png" />
+    <None Remove="sapphire.png" />
+    <None Remove="saria-check.png" />
+    <None Remove="saria-disabledcheck.png" />
+    <None Remove="saria.png" />
+    <None Remove="scale1.png" />
+    <None Remove="scale2.png" />
+    <None Remove="shadow-small.png" />
+    <None Remove="shadow.png" />
+    <None Remove="shadowmedallion.png" />
+    <None Remove="shadowspirit.png" />
+    <None Remove="shield3.png" />
+    <None Remove="skulltula.png" />
+    <None Remove="skulltula1.png" />
+    <None Remove="skulltula2.png" />
+    <None Remove="skulltula3.png" />
+    <None Remove="skulltula4.png" />
+    <None Remove="skulltula5.png" />
+    <None Remove="sling3.png" />
+    <None Remove="sling4.png" />
+    <None Remove="sling5.png" />
+    <None Remove="slingshot.png" />
+    <None Remove="songofstorms-check.png" />
+    <None Remove="songofstorms-disabledcheck.png" />
+    <None Remove="songofstorms.png" />
+    <None Remove="songoftime-check.png" />
+    <None Remove="songoftime-disabledcheck.png" />
+    <None Remove="songoftime.png" />
+    <None Remove="spirit-small.png" />
+    <None Remove="spirit.png" />
+    <None Remove="spiritmedallion.png" />
+    <None Remove="stones %281%29.png" />
+    <None Remove="stones.png" />
+    <None Remove="sunsong-check.png" />
+    <None Remove="sunsong-disabledcheck.png" />
+    <None Remove="sunsong.png" />
+    <None Remove="water-small.png" />
+    <None Remove="water.png" />
+    <None Remove="watermedallion.png" />
+    <None Remove="yellow_note-check.png" />
+    <None Remove="yellow_note-disabledcheck.png" />
+    <None Remove="yellow_note.png" />
+    <None Remove="zelda-check.png" />
+    <None Remove="zelda-disabledcheck.png" />
+    <None Remove="zelda.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\arrows-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\arrows.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\arrowsleft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\arrowsright.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\blue_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\blue_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\blue_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\blue_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bomb-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bomb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bomb2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bomb3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bomb4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\boomerang-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\boomerang.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\boots-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\boots.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bootsleft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bootsright.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bottle-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bottle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bottle2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bow-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bow2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bow3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bow4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\deku.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\din-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\din.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dodongo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\emerald-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\emerald-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\emerald.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\epona-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\epona-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\epona-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\epona.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\fire-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\fire.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\firemedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\firemedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\forest-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\forest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\forestmedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\forestmedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\free.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\green_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\green_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\green_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\green_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\hammer-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\hammer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\hookshot-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\hookshot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\hookshot2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\jabu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lift-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lift.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lift2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lift3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\light-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lightmedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lightmedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\mirror-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\mirror.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\orange_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\orange_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\orange_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\orange_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\purple_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\purple_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\purple_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\purple_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\red_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\red_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\red_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\red_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ruby-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ruby-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ruby.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sapphire-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sapphire.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\saria-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\saria-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\saria-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\saria.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\scale-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\scale.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\scale2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\shadow-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\shadow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\shadowmedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\shadowmedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\shadowspirit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\skulltula5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sling-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sling.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sling2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sling3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sling4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songofstorms-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songofstorms-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songofstorms-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songofstorms.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songoftime-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songoftime-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songoftime-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\songoftime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\spirit-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\spirit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\spiritmedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\spiritmedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\stones (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\stones.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sunsong-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sunsong-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sunsong-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sunsong.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\unknown-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\water-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\water.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\watermedallion-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\watermedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\yellow_note-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\yellow_note-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\yellow_note-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\yellow_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\zelda-check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\zelda-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\zelda-disabledcheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\zelda.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

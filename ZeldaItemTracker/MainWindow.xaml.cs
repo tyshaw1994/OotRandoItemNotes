@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace ZeldaItemTracker
 {
@@ -59,6 +61,146 @@ namespace ZeldaItemTracker
             Frogs2.TextChanged += Frogs2_TextChanged;
 
             WothItems.TextChanged += WothItems_TextChanged;
+        }
+
+        private void SetDungeonsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
+            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
+            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
+
+            if (dungeonRewards.Count <= 6)
+            {
+                int index = 0;
+                foreach(var dungeonReward in dungeonRewards)
+                {
+                    var medallionLabel = medallionLabels[index];
+                    var medallion = medallions[index];
+
+                    if(string.IsNullOrEmpty(dungeonReward.DungeonName))
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                    }
+                    else
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                    }
+
+                    if(string.IsNullOrEmpty(dungeonReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+            }
+            else
+            {
+                int index = 0;
+                foreach(var dungeonReward in dungeonRewards.Take(6))
+                {
+                    var medallionLabel = medallionLabels[index];
+                    var medallion = medallions[index];
+
+                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                    }
+                    else
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                    }
+
+                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+
+                var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
+                var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
+
+                index = 0;
+                foreach (var uselessReward in dungeonRewards.TakeLast(3))
+                {
+                    var stone = stones[index];
+
+                    if (string.IsNullOrEmpty(uselessReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+            }
+        }
+
+        private void ResetDungeons_Click(object sender, RoutedEventArgs e)
+        {
+            var defaultLayout = DungeonHelper.GetDefaultDungeons();
+            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
+            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
+
+
+            int index = 0;
+            foreach (var dungeonReward in defaultLayout.Take(6))
+            {
+                var medallionLabel = medallionLabels[index];
+                var medallion = medallions[index];
+
+                if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                {
+                    medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                }
+
+                if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                {
+                    continue;
+                }
+                else
+                {
+                    medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                }
+
+                index++;
+            }
+
+            var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
+
+            index = 0;
+            foreach (var uselessReward in defaultLayout.TakeLast(3))
+            {
+                var stone = stones[index];
+
+                if (string.IsNullOrEmpty(uselessReward.RewardName))
+                {
+                    continue;
+                }
+                else
+                {
+                    stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
+                }
+
+                index++;
+            }
         }
 
         private void WothItems_TextChanged(object sender, TextChangedEventArgs e)
@@ -215,6 +357,226 @@ namespace ZeldaItemTracker
             WothItems.TextChanged += WothItems_TextChanged;
         }
 
-       
+        private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+
+            // Get all grouped items by name
+            var imageFileNames = Directory.GetFiles("images/").Where(file => file.Contains(clickedImage.Name) && !file.Contains("disabled"))
+                .OrderBy(x => x)
+                .ToList();
+
+            if (imageFileNames.Count > 1)
+            {
+                var currentSource = clickedImage.Source.ToString();
+                var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+                if (currentFile.Contains("disabled"))
+                {
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}.png", System.UriKind.Relative));
+                    return;
+                }
+
+                if (int.TryParse(currentFile.Substring(currentFile.Length - 1, 1), out var currentIndex))
+                {
+                    if (currentIndex + 1 > imageFileNames.Count)
+                        return;
+
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}{currentIndex + 1}.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/{imageFileNames[1]}", System.UriKind.Relative));
+                }
+            }
+            else
+            {
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}.png", System.UriKind.Relative));
+            }
+        }
+
+        private void Item_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+
+            // Get all grouped items by name
+            var imageFileNames = Directory.GetFiles("images/").Where(file => file.Contains(clickedImage.Name) && !file.Contains("disabled"))
+                .OrderBy(x => x)
+                .ToList();
+
+            if (imageFileNames.Count > 1)
+            {
+                var currentSource = clickedImage.Source.ToString();
+                var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+                if (currentFile.Contains("disabled"))
+                {
+                    return;
+                }
+
+                if (int.TryParse(currentFile.Substring(currentFile.Length - 1, 1), out var currentIndex))
+                {
+                    if (currentIndex - 1 <= 1)
+                    {
+                        clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}.png", System.UriKind.Relative));
+                        return;
+                    }
+
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}{currentIndex - 1}.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}-disabled.png", System.UriKind.Relative));
+                }
+            }
+            else
+            {
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{clickedImage.Name}-disabled.png", System.UriKind.Relative));
+            }
+        }
+
+        private void CompoundItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (currentFile.Contains("disabled"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}left.png", System.UriKind.Relative));
+            }
+            else if (currentFile.Contains("right"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("right"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}.png", System.UriKind.Relative));
+            }
+            else if (currentFile.Contains("left"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("left"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-disabled.png", System.UriKind.Relative));
+            }
+            else
+            {
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}right.png", System.UriKind.Relative));
+            }
+        }
+
+        private void CompoundItem_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (currentFile.Contains("disabled"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}right.png", System.UriKind.Relative));
+            }
+            else if (currentFile.Contains("left"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("left"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}.png", System.UriKind.Relative));
+            }
+            else if (currentFile.Contains("right"))
+            {
+                var activeFileName = currentFile.Substring(0, currentFile.IndexOf("right"));
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-disabled.png", System.UriKind.Relative));
+            }
+            else
+            {
+                clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}left.png", System.UriKind.Relative));
+            }
+        }
+
+        private void Song_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (currentFile.Contains("disabled"))
+            {
+                if (currentFile.Contains("check"))
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-check.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}.png", System.UriKind.Relative));
+                }
+            }
+            else
+            {
+                if (currentFile.Contains("check"))
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-check"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-disabledcheck.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}-disabled.png", System.UriKind.Relative));
+                }
+            }
+        }
+
+        private void Song_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (currentFile.Contains("disabled"))
+            {
+                if (currentFile.Contains("check"))
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-disabled.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}-disabledcheck.png", System.UriKind.Relative));
+                }
+            }
+            else
+            {
+                if (currentFile.Contains("check"))
+                {
+                    var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-check"));
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}.png", System.UriKind.Relative));
+                }
+                else
+                {
+                    clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}-check.png", System.UriKind.Relative));
+                }
+            }
+        }
+
+        private void Medallion_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (!currentFile.Contains("disabled"))
+                return;
+
+            var activeFileName = currentFile.Substring(0, currentFile.IndexOf("-disabled"));
+
+            clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{activeFileName}.png", System.UriKind.Relative));
+        }
+
+        private void Medallion_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var clickedImage = sender as System.Windows.Controls.Image;
+            var currentSource = clickedImage.Source.ToString();
+            var currentFile = currentSource.Substring(currentSource.LastIndexOf('/') + 1, (currentSource.IndexOf(".png") - currentSource.LastIndexOf('/')) - 1);
+
+            if (currentFile.Contains("disabled"))
+                return;
+
+            clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}-disabled.png", System.UriKind.Relative));
+        }
     }
 }
