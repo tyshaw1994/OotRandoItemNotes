@@ -297,10 +297,10 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="22,254,0,0" FontSize="18" HorizontalAlignment="Left" Width="294" Height="44" VerticalAlignment="Top" />
         <Button Name="SetDungeons"
             materialDesign:HintAssist.Hint="Set Dungeons Button"
-            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,0,205,685" Click="SetDungeonsButton_Click" Height="32" VerticalAlignment="Bottom">Set</Button>
+            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,0,205,676" Click="SetDungeonsButton_Click" Height="32" VerticalAlignment="Bottom">Set</Button>
         <Button Name="ResetDungeons"
             materialDesign:HintAssist.Hint="Reset Dungeons Button"
-            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,299,0,0" Click="ResetDungeons_Click" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70">Reset</Button>
+            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,308,0,0" Click="ResetDungeons_Click" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70">Reset</Button>
 
     </Grid>
 </Window>
