@@ -52,7 +52,6 @@ namespace ZeldaItemTracker
             Woth3.TextChanged += Woth3_TextChanged;
             Woth4.TextChanged += Woth4_TextChanged;
 
-            OOTItem.TextChanged += OOTItem_TextChanged;
             Biggoron.TextChanged += Biggoron_TextChanged;
             Skulls30.TextChanged += Skulls30_TextChanged;
             Skulls40.TextChanged += Skulls40_TextChanged;
@@ -61,92 +60,6 @@ namespace ZeldaItemTracker
             Frogs2.TextChanged += Frogs2_TextChanged;
 
             WothItems.TextChanged += WothItems_TextChanged;
-        }
-
-        private void SetDungeonsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
-            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
-            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
-
-            if (dungeonRewards.Count <= 6)
-            {
-                int index = 0;
-                foreach(var dungeonReward in dungeonRewards)
-                {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
-
-                    if(string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
-
-                    if(string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
-                }
-            }
-            else
-            {
-                int index = 0;
-                foreach(var dungeonReward in dungeonRewards.Take(6))
-                {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
-
-                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
-
-                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
-                }
-
-                var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
-                var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
-
-                index = 0;
-                foreach (var uselessReward in dungeonRewards.TakeLast(3))
-                {
-                    var stone = stones[index];
-
-                    if (string.IsNullOrEmpty(uselessReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
-                }
-            }
         }
 
         private void ResetDungeons_Click(object sender, RoutedEventArgs e)
@@ -315,11 +228,6 @@ namespace ZeldaItemTracker
         private void Biggoron_TextChanged(object sender, TextChangedEventArgs e)
         {
             Biggoron.Text = NotesManager.GetFullName(Biggoron.Text);
-        }
-
-        private void OOTItem_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            OOTItem.Text = NotesManager.GetFullName(OOTItem.Text);
         }
 
         private void ReprintNotes()
@@ -577,6 +485,95 @@ namespace ZeldaItemTracker
                 return;
 
             clickedImage.Source = new BitmapImage(new System.Uri(@$"/images/{currentFile}-disabled.png", System.UriKind.Relative));
+        }
+
+        private void Dungeons_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter)
+                return;
+
+            var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
+            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
+            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
+
+            if (dungeonRewards.Count <= 6)
+            {
+                int index = 0;
+                foreach (var dungeonReward in dungeonRewards)
+                {
+                    var medallionLabel = medallionLabels[index];
+                    var medallion = medallions[index];
+
+                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                    }
+                    else
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                    }
+
+                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+            }
+            else
+            {
+                int index = 0;
+                foreach (var dungeonReward in dungeonRewards.Take(6))
+                {
+                    var medallionLabel = medallionLabels[index];
+                    var medallion = medallions[index];
+
+                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                    }
+                    else
+                    {
+                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                    }
+
+                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+
+                var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
+                var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
+
+                index = 0;
+                foreach (var uselessReward in dungeonRewards.TakeLast(3))
+                {
+                    var stone = stones[index];
+
+                    if (string.IsNullOrEmpty(uselessReward.RewardName))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
+                    }
+
+                    index++;
+                }
+            }
         }
     }
 }

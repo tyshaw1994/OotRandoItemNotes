@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Title="MainWindow" Height="975" Width="633"
+        Title="MainWindow" Height="1025" Width="633"
         MouseLeftButtonDown="Card_MouseLeftButtonDown">
     <Window.Resources>
         <ResourceDictionary>
@@ -42,7 +42,7 @@
         </Image>
         <Image Name="medallion1" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="27,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/forestmedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/lightmedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -53,7 +53,7 @@
         </Image>
         <Image Name="medallion2" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="97,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/firemedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/forestmedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -64,7 +64,7 @@
         </Image>
         <Image Name="medallion3" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="167,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/watermedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/firemedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -75,7 +75,7 @@
         </Image>
         <Image Name="medallion4" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="237,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/shadowmedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/watermedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -86,7 +86,7 @@
         </Image>
         <Image Name="medallion5" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="307,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/spiritmedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/shadowmedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -97,7 +97,7 @@
         </Image>
         <Image Name="medallion6" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="377,45,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
-                <BitmapImage DecodePixelWidth="50" UriSource="/images/lightmedallion-disabled.png"></BitmapImage>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/spiritmedallion-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
 
@@ -165,6 +165,25 @@
             </Image.Source>
         </Image>
 
+        <!-- ROW 4-->
+        <Image Name="sword" MouseLeftButtonDown="Item_MouseLeftButtonDown" MouseRightButtonDown="Item_MouseRightButtonDown" Width="50" Height="50" Margin="27,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/sword-disabled.png"></BitmapImage>
+            </Image.Source>
+        </Image>
+
+        <Image Name="sling" MouseLeftButtonDown="Item_MouseLeftButtonDown" MouseRightButtonDown="Item_MouseRightButtonDown" Width="50" Height="50" Margin="97,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/sling-disabled.png"></BitmapImage>
+            </Image.Source>
+        </Image>
+
+        <Image Name="skulltula" MouseLeftButtonDown="Item_MouseLeftButtonDown" MouseRightButtonDown="Item_MouseRightButtonDown" Width="50" Height="50" Margin="167,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="50" UriSource="/images/skulltula-disabled.png"></BitmapImage>
+            </Image.Source>
+        </Image>
+
         <!-- Songs -->
         <Image Name="zelda" MouseLeftButtonDown="Song_MouseLeftButtonDown" MouseRightButtonDown="Song_MouseRightButtonDown" Width="50" Height="50" Margin="480,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
@@ -229,17 +248,17 @@
         </Image>
 
         <!-- Extra Dungeons -->
-        <Image Name="stone1" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="70,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Image Name="stone1" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="237,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
                 <BitmapImage DecodePixelWidth="50" UriSource="/images/emerald-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
-        <Image Name="stone2" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="140,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Image Name="stone2" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="307,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
                 <BitmapImage DecodePixelWidth="50" UriSource="/images/ruby-disabled.png"></BitmapImage>
             </Image.Source>
         </Image>
-        <Image Name="stone3" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="210,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Image Name="stone3" MouseLeftButtonDown="Medallion_MouseLeftButtonDown" MouseRightButtonDown="Medallion_MouseRightButtonDown" Width="50" Height="50" Margin="377,255,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Image.Source>
                 <BitmapImage DecodePixelWidth="50" UriSource="/images/sapphire-disabled.png"></BitmapImage>
             </Image.Source>
@@ -258,24 +277,21 @@
         <TextBox Name="Woth4" KeyDown="Woth_KeyDown"
             materialDesign:HintAssist.Hint="WOTH 4"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="8,570,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
-        <TextBox Name ="OOTItem"
-            materialDesign:HintAssist.Hint="OOT Item"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,375,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="Biggoron"
             materialDesign:HintAssist.Hint="Biggoron"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,505,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="Skulls30"
             materialDesign:HintAssist.Hint="30 Skulls"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="8,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,375,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="Skulls40"
             materialDesign:HintAssist.Hint="40 Skulls"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,440,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="Skulls50"
             materialDesign:HintAssist.Hint="50 Skulls"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="441,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="180" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,505,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="OOTSong"
             materialDesign:HintAssist.Hint="OOT Song"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,440,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="8,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
         <TextBox Name ="Frogs2"
             materialDesign:HintAssist.Hint="Frogs 2"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="227,570,0,0" FontSize="18" HorizontalAlignment="Left" Width="200" Height="44" VerticalAlignment="Top" />
@@ -292,15 +308,12 @@
         <TextBox Name="Sometimes4"
             materialDesign:HintAssist.Hint="Sometimes 4"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="441,570,0,0" FontSize="18" HorizontalAlignment="Left" Width="180" Height="44" VerticalAlignment="Top" />
+        <TextBox Name="Sometimes5"
+            materialDesign:HintAssist.Hint="Sometimes 5"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="441,637,0,0" FontSize="18" HorizontalAlignment="Left" Width="180" Height="44" VerticalAlignment="Top" />
         <TextBox Name="Dungeons"
-            materialDesign:HintAssist.Hint="Dungeons"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="22,254,0,0" FontSize="18" HorizontalAlignment="Left" Width="294" Height="44" VerticalAlignment="Top" />
-        <Button Name="SetDungeons"
-            materialDesign:HintAssist.Hint="Set Dungeons Button"
-            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,0,205,676" Click="SetDungeonsButton_Click" Height="32" VerticalAlignment="Bottom">Set</Button>
-        <Button Name="ResetDungeons"
-            materialDesign:HintAssist.Hint="Reset Dungeons Button"
-            Style="{StaticResource MaterialDesignRaisedButton}" Margin="357,308,0,0" Click="ResetDungeons_Click" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70">Reset</Button>
+            materialDesign:HintAssist.Hint="Dungeons" KeyDown="Dungeons_KeyDown"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="14,971,0,0" FontSize="18" HorizontalAlignment="Left" Width="294" Height="44" VerticalAlignment="Top" />
 
     </Grid>
 </Window>

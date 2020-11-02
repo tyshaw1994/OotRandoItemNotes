@@ -158,6 +158,7 @@
     <None Remove="images\shadowmedallion.png" />
     <None Remove="images\shadowspirit.png" />
     <None Remove="images\shield3.png" />
+    <None Remove="images\skulltula-disabled.png" />
     <None Remove="images\skulltula.png" />
     <None Remove="images\skulltula1.png" />
     <None Remove="images\skulltula2.png" />
@@ -189,6 +190,9 @@
     <None Remove="images\sunsong-disabled.png" />
     <None Remove="images\sunsong-disabledcheck.png" />
     <None Remove="images\sunsong.png" />
+    <None Remove="images\sword-disabled.png" />
+    <None Remove="images\sword.png" />
+    <None Remove="images\sword1.png" />
     <None Remove="images\unknown-small.png" />
     <None Remove="images\water-small.png" />
     <None Remove="images\water.png" />
@@ -312,9 +316,6 @@
     <Content Include="images\bomb3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\bomb4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="images\boomerang-disabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -352,9 +353,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\bow3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\bow4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\deku.png">
@@ -561,10 +559,10 @@
     <Content Include="images\shadowspirit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\skulltula.png">
+    <Content Include="images\skulltula-disabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\skulltula1.png">
+    <Content Include="images\skulltula.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\skulltula2.png">
@@ -589,9 +587,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sling3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\sling4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\songofstorms-check.png">
@@ -646,6 +641,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sunsong.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sword-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sword.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\unknown-small.png">
