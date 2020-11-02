@@ -32,11 +32,6 @@ namespace ZeldaItemTracker
                 {
                     LocationName = "WOTH 4",
                     Items = ""
-                },
-                new LocationNotes
-                {
-                    LocationName = "WOTH 5",
-                    Items = ""
                 }
             };
 
