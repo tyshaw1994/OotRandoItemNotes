@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace ZeldaItemTracker
 {
@@ -14,6 +16,8 @@ namespace ZeldaItemTracker
     public partial class MainWindow : Window
     {
         internal List<LocationNotes> _locationNotes;
+        DispatcherTimer timer;
+        DateTime start;
 
         public MainWindow()
         {
@@ -52,14 +56,34 @@ namespace ZeldaItemTracker
             Woth3.TextChanged += Woth3_TextChanged;
             Woth4.TextChanged += Woth4_TextChanged;
 
-            Biggoron.TextChanged += Biggoron_TextChanged;
-            Skulls30.TextChanged += Skulls30_TextChanged;
-            Skulls40.TextChanged += Skulls40_TextChanged;
-            Skulls50.TextChanged += Skulls50_TextChanged;
-            OOTSong.TextChanged += OOTSong_TextChanged;
-            Frogs2.TextChanged += Frogs2_TextChanged;
+            Barren1.TextChanged += TextBox_TextChanged;
+            Barren2.TextChanged += TextBox_TextChanged;
+
+            Biggoron.TextChanged += TextBox_TextChanged;
+            Skulls30.TextChanged += TextBox_TextChanged;
+            Skulls40.TextChanged += TextBox_TextChanged;
+            Skulls50.TextChanged += TextBox_TextChanged;
+            OOTSong.TextChanged += TextBox_TextChanged;
+            Frogs2.TextChanged += TextBox_TextChanged;
 
             WothItems.TextChanged += WothItems_TextChanged;
+
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
+            {
+                IsEnabled = false
+            };
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Timer.Text = (DateTime.Now - start).ToString(@"hh\:mm\:ss");
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            textBox.Text = NotesManager.GetFullName(textBox.Text);
         }
 
         private void ResetDungeons_Click(object sender, RoutedEventArgs e)
@@ -127,7 +151,14 @@ namespace ZeldaItemTracker
 
             for (int i = 0; i < _locationNotes.Count; i++)
             {
-                _locationNotes[i] = new LocationNotes(wothLocations[i]);
+                try
+                {
+                    _locationNotes[i] = new LocationNotes(wothLocations[i]);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
             }
         }
 
@@ -198,36 +229,6 @@ namespace ZeldaItemTracker
             }
 
             Woth4.Text = fullName;
-        }
-
-        private void Frogs2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Frogs2.Text = NotesManager.GetFullName(Frogs2.Text);
-        }
-
-        private void OOTSong_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            OOTSong.Text = NotesManager.GetFullName(OOTSong.Text);
-        }
-
-        private void Skulls50_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls50.Text = NotesManager.GetFullName(Skulls50.Text);
-        }
-
-        private void Skulls40_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls40.Text = NotesManager.GetFullName(Skulls40.Text);
-        }
-
-        private void Skulls30_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls30.Text = NotesManager.GetFullName(Skulls30.Text);
-        }
-
-        private void Biggoron_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Biggoron.Text = NotesManager.GetFullName(Biggoron.Text);
         }
 
         private void ReprintNotes()
@@ -492,87 +493,120 @@ namespace ZeldaItemTracker
             if (e.Key != Key.Enter)
                 return;
 
-            var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
-            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
-            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
-
-            if (dungeonRewards.Count <= 6)
+            try
             {
-                int index = 0;
-                foreach (var dungeonReward in dungeonRewards)
+                var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
+                var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
+                var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
+
+                if (dungeonRewards.Count <= 6)
                 {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
+                    int index = 0;
+                    foreach (var dungeonReward in dungeonRewards)
+                    {
+                        var medallionLabel = medallionLabels[index];
+                        var medallion = medallions[index];
 
-                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
+                        if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                        }
+                        else
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                        }
 
-                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
+                        if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                        }
 
-                    index++;
+                        index++;
+                    }
                 }
+                else
+                {
+                    int index = 0;
+                    foreach (var dungeonReward in dungeonRewards.Take(6))
+                    {
+                        var medallionLabel = medallionLabels[index];
+                        var medallion = medallions[index];
+
+                        if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                        }
+                        else
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                        }
+
+                        if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                        }
+
+                        index++;
+                    }
+
+                    var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
+                    var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
+
+                    index = 0;
+                    foreach (var uselessReward in dungeonRewards.TakeLast(3))
+                    {
+                        var stone = stones[index];
+
+                        if (string.IsNullOrEmpty(uselessReward.RewardName))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
+                        }
+
+                        index++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {       
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
             }
             else
             {
-                int index = 0;
-                foreach (var dungeonReward in dungeonRewards.Take(6))
+                timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
                 {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
+                    IsEnabled = true
+                };
 
-                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
+                start = DateTime.Now;
+            }
+        }
 
-                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
-                }
-
-                var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
-                var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
-
-                index = 0;
-                foreach (var uselessReward in dungeonRewards.TakeLast(3))
-                {
-                    var stone = stones[index];
-
-                    if (string.IsNullOrEmpty(uselessReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
-                }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
+                start = DateTime.Now;
             }
         }
     }
