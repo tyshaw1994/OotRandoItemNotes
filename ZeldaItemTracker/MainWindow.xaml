@@ -301,7 +301,7 @@
         <TextBox Name ="Frogs2"
             materialDesign:HintAssist.Hint="Frogs 2"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="221.5,512,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
-        <TextBox Name="WothItems" Height="207" HorizontalAlignment="Left" Width="589" VerticalAlignment="Top" Margin="14,778,0,0" FontSize="18" AcceptsTab="True" />
+        <TextBox Name="WothItems" Height="207" HorizontalAlignment="Left" Width="589" VerticalAlignment="Top" Margin="14,799,0,0" FontSize="18" AcceptsTab="True" />
         <TextBox Name="Sometimes1"
             materialDesign:HintAssist.Hint="Sometimes 1"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="435,382,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
@@ -319,7 +319,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="435,648,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
         <TextBox Name="Dungeons"
             materialDesign:HintAssist.Hint="Dungeons" KeyDown="Dungeons_KeyDown"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="14,1006,0,0" FontSize="18" HorizontalAlignment="Left" Width="294" Height="44" VerticalAlignment="Top" />
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="14,1038,0,0" FontSize="18" HorizontalAlignment="Left" Width="294" Height="44" VerticalAlignment="Top" />
         <TextBox x:Name="Barren1"
             materialDesign:HintAssist.Hint="Barren 1"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="8,716,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
