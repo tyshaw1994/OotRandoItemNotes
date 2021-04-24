@@ -31,11 +31,11 @@ namespace ZeldaItemTracker
                 {
                     if (locationNote.LocationName.EndsWith(' '))
                     {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n\n";
+                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n";
                     }
                     else
                     {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n\n";
+                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n";
                     }
                 }
                 else
@@ -243,11 +243,11 @@ namespace ZeldaItemTracker
                 {
                     if (locationNote.LocationName.EndsWith(' '))
                     {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n\n";
+                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n";
                     }
                     else
                     {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n\n";
+                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n";
                     }
                 }
                 else
