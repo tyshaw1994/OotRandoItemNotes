@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Threading;
 
 namespace ZeldaItemTracker
@@ -15,7 +16,6 @@ namespace ZeldaItemTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal List<LocationNotes> _locationNotes;
         DispatcherTimer timer;
         DateTime start;
 
@@ -23,50 +23,27 @@ namespace ZeldaItemTracker
         {
             InitializeComponent();
 
-            _locationNotes = NotesManager.BaseLocationNotes;
+            Woth1.TextChanged += Location_TextChanged;
+            Woth2.TextChanged += Location_TextChanged;
+            Woth3.TextChanged += Location_TextChanged;
+            Woth4.TextChanged += Location_TextChanged;
+            Woth5.TextChanged += Location_TextChanged;
+            Woth1Items.TextChanged += TextBox_TextChanged;
+            Woth2Items.TextChanged += TextBox_TextChanged;
+            Woth3Items.TextChanged += TextBox_TextChanged;
+            Woth4Items.TextChanged += TextBox_TextChanged;
+            Woth5Items.TextChanged += TextBox_TextChanged;
 
-            foreach (var locationNote in _locationNotes)
-            {
-                if (locationNote != _locationNotes.Last())
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n";
-                    }
-                }
-                else
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}";
-                    }
-                }
-            }
+            Barren1.TextChanged += Location_TextChanged;
+            Barren2.TextChanged += Location_TextChanged;
+            Barren3.TextChanged += Location_TextChanged;
 
-            Woth1.TextChanged += Woth1_TextChanged;
-            Woth2.TextChanged += Woth2_TextChanged;
-            Woth3.TextChanged += Woth3_TextChanged;
-            Woth4.TextChanged += Woth4_TextChanged;
-
-            Barren1.TextChanged += TextBox_TextChanged;
-            Barren2.TextChanged += TextBox_TextChanged;
-
-            Biggoron.TextChanged += TextBox_TextChanged;
             Skulls30.TextChanged += TextBox_TextChanged;
             Skulls40.TextChanged += TextBox_TextChanged;
             Skulls50.TextChanged += TextBox_TextChanged;
             OOTSong.TextChanged += TextBox_TextChanged;
             Frogs2.TextChanged += TextBox_TextChanged;
-
-            WothItems.TextChanged += WothItems_TextChanged;
+            SkullMask.TextChanged += TextBox_TextChanged;
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
             {
@@ -82,8 +59,98 @@ namespace ZeldaItemTracker
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textBox = sender as TextBox;
+            var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
+            if (imageName == null)
+                return;
+            
+            // Figure out which, if any, images are activated
+            if (textBox.Name.Contains("WOTH", StringComparison.OrdinalIgnoreCase) && textBox.Name.Contains("ITEM", StringComparison.OrdinalIgnoreCase))
+            {
+                // 3 Item slots per WOTH
+                var wothNumber = textBox.Name.Substring(4, 1);
+                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
+                var itemSlotToUse = relevantItemSlots.FirstOrDefault(x => x.Source == null);
 
-            textBox.Text = NotesManager.GetFullName(textBox.Text);
+                if(itemSlotToUse != null)
+                {
+                    itemSlotToUse.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+            }
+            else
+            {
+                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
+                if(relevantItemSlot != null)
+                {
+                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+            }
+
+            textBox.Text = "";
+        }
+
+        private void HintItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount != 2)
+                return;
+
+            var image = sender as Image;
+            image.Source = null;
+
+            // Shift images if needed (only for WOTH for now)
+            if (image.Name.StartsWith("WOTH", StringComparison.OrdinalIgnoreCase))
+            {
+                var wothNumber = image.Name.Substring(4, 1);
+                var currentSlot = image.Name.Substring(image.Name.Length-1, 1);
+                
+                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
+                var firstSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM1", StringComparison.OrdinalIgnoreCase));
+                var secondSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM2", StringComparison.OrdinalIgnoreCase));
+                var thirdSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM3", StringComparison.OrdinalIgnoreCase));
+
+                switch (currentSlot)
+                {
+                    case "1":
+                        // Check if 2 and 3 are active
+                        if(secondSlot.Source != null)
+                        {
+                            firstSlot.Source = secondSlot.Source;
+
+                            if(thirdSlot.Source != null)
+                            {
+                                secondSlot.Source = thirdSlot.Source;
+                                thirdSlot.Source = null;
+                            }
+                            else
+                            {
+                                secondSlot.Source = null;
+                            }
+                        }
+
+                        break;
+
+                    case "2":
+                        // Check if 3 is active
+                        if(thirdSlot.Source != null)
+                        {
+                            secondSlot.Source = thirdSlot.Source;
+                            thirdSlot.Source = null;
+                        }
+
+                        break;
+
+                    case "3":
+                        // Do nothing
+                        break;
+
+                    default:
+                        // Shouldn't happen
+                        break;
+                }
+            }
+            else
+            {
+                image.Source = null;
+            }
         }
 
         private void ResetDungeons_Click(object sender, RoutedEventArgs e)
@@ -140,130 +207,15 @@ namespace ZeldaItemTracker
             }
         }
 
-        private void WothItems_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(WothItems.Text))
-            {
-                return;
-            }
-
-            var wothLocations = WothItems.Text.Split("\n\n\n");
-
-            for (int i = 0; i < _locationNotes.Count; i++)
-            {
-                try
-                {
-                    _locationNotes[i] = new LocationNotes(wothLocations[i]);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-            }
-        }
-
         private void Card_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
-        private void Woth_KeyDown(object sender, KeyEventArgs e)
+        private void Location_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                ReprintNotes();
-            }
-        }
-
-        private void Woth1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth1.Text);
-
-            _locationNotes[0].LocationName = fullName;
-
-            if (fullName != Woth1.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth1.Text = fullName;
-        }
-
-        private void Woth2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth2.Text);
-
-            _locationNotes[1].LocationName = fullName;
-
-            if (fullName != Woth2.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth2.Text = fullName;
-        }
-
-        private void Woth3_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth3.Text);
-
-            _locationNotes[2].LocationName = fullName;
-
-            if (fullName != Woth3.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth3.Text = fullName;
-        }
-
-        private void Woth4_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth4.Text);
-
-            _locationNotes[3].LocationName = fullName;
-
-            if (fullName != Woth4.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth4.Text = fullName;
-        }
-
-        private void ReprintNotes()
-        {
-            WothItems.TextChanged -= WothItems_TextChanged;
-
-            WothItems.Text = "";
-
-            foreach (var locationNote in _locationNotes)
-            {
-                if (locationNote != _locationNotes.Last())
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n";
-                    }
-                }
-                else
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}";
-                    }
-                }
-            }
-
-            WothItems.TextChanged += WothItems_TextChanged;
+            var textBox = sender as TextBox;
+            textBox.Text = NotesManager.GetFullName(textBox.Text);
         }
 
         private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
