@@ -177,6 +177,7 @@
     <None Remove="images\sling4.png" />
     <None Remove="images\sling5.png" />
     <None Remove="images\slingshot.png" />
+    <None Remove="images\sold.png" />
     <None Remove="images\songofstorms-check.png" />
     <None Remove="images\songofstorms-disabled.png" />
     <None Remove="images\songofstorms-disabledcheck.png" />
@@ -607,6 +608,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sling3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\songofstorms-check.png">

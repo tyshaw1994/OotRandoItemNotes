@@ -42,7 +42,9 @@ namespace ZeldaItemTracker
             { "ser", "blue_note" },
             { "req", "orange_note" },
             { "noct", "purple_note" },
-            { "pre", "yellow_note" }
+            { "pre", "yellow_note" },
+            { "x", "sold" }
+
         };
     }
 }

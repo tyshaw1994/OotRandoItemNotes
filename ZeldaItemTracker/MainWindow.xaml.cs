@@ -497,37 +497,11 @@ namespace ZeldaItemTracker
                             medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
                         }
 
-                        if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                        }
-
                         index++;
                     }
 
                     var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
                     var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
-
-                    index = 0;
-                    foreach (var uselessReward in dungeonRewards.TakeLast(3))
-                    {
-                        var stone = stones[index];
-
-                        if (string.IsNullOrEmpty(uselessReward.RewardName))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
-                        }
-
-                        index++;
-                    }
                 }
             }
             catch (Exception)
