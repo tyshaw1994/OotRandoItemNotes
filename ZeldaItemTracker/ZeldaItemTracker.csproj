@@ -51,6 +51,7 @@
     <None Remove="images\arrows.png" />
     <None Remove="images\arrowsleft.png" />
     <None Remove="images\arrowsright.png" />
+    <None Remove="images\bigkey.png" />
     <None Remove="images\bluetunic.png" />
     <None Remove="images\blue_note-check.png" />
     <None Remove="images\blue_note-disabled.png" />
@@ -177,6 +178,7 @@
     <None Remove="images\sling4.png" />
     <None Remove="images\sling5.png" />
     <None Remove="images\slingshot.png" />
+    <None Remove="images\smallkey.png" />
     <None Remove="images\sold.png" />
     <None Remove="images\songofstorms-check.png" />
     <None Remove="images\songofstorms-disabled.png" />
@@ -296,6 +298,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\arrowsright.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bigkey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\bluetunic.png">
@@ -608,6 +613,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sling3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\smallkey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sold.png">

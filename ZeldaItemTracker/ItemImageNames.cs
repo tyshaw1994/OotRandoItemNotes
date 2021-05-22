@@ -43,7 +43,9 @@ namespace ZeldaItemTracker
             { "req", "orange_note" },
             { "noct", "purple_note" },
             { "pre", "yellow_note" },
-            { "x", "sold" }
+            { "x", "sold" },
+            { "sk", "smallkey" },
+            { "bk", "bigkey" }
 
         };
     }
