@@ -45,6 +45,13 @@ namespace ZeldaItemTracker
             Frogs2.TextChanged += TextBox_TextChanged;
             SkullMask.TextChanged += TextBox_TextChanged;
 
+            Sometimes1.TextChanged += TextBox_TextChanged;
+            Sometimes2.TextChanged += TextBox_TextChanged;
+            Sometimes3.TextChanged += TextBox_TextChanged;
+            Sometimes4.TextChanged += TextBox_TextChanged;
+            Sometimes5.TextChanged += TextBox_TextChanged;
+            Sometimes6.TextChanged += TextBox_TextChanged;
+
             timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
             {
                 IsEnabled = false

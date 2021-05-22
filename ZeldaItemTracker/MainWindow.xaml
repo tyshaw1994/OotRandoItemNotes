@@ -354,21 +354,32 @@
         <TextBox Name="Sometimes1"
             materialDesign:HintAssist.Hint="Sometimes 1"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,480,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes1Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,470,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
         <TextBox Name="Sometimes2"
             materialDesign:HintAssist.Hint="Sometimes 2"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,550,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes2Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,540,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
         <TextBox Name="Sometimes3"
             materialDesign:HintAssist.Hint="Sometimes 3"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,620,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes3Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,610,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
         <TextBox Name="Sometimes4"
             materialDesign:HintAssist.Hint="Sometimes 4"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,690,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes4Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,680,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
         <TextBox Name="Sometimes5"
             materialDesign:HintAssist.Hint="Sometimes 5"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,760,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes5Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,750,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        
         <TextBox Name ="Sometimes6"
             materialDesign:HintAssist.Hint="Sometimes 6"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,830,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+        <Image x:Name="Sometimes6Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,820,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
 
         <TextBox Name="Dungeons"
             materialDesign:HintAssist.Hint="Dungeons" KeyDown="Dungeons_KeyDown"
