@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.TextFormatting;
 using System.Windows.Threading;
 
 namespace ZeldaItemTracker
@@ -18,44 +17,91 @@ namespace ZeldaItemTracker
     {
         DispatcherTimer timer;
         DateTime start;
+        HintDistributionSettings hints;
+        const string League = "league";
+        const string DDR = "ddr";
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Woth1.TextChanged += Location_TextChanged;
-            Woth2.TextChanged += Location_TextChanged;
-            Woth3.TextChanged += Location_TextChanged;
-            Woth4.TextChanged += Location_TextChanged;
-            Woth5.TextChanged += Location_TextChanged;
-            Woth1Items.TextChanged += TextBox_TextChanged;
-            Woth2Items.TextChanged += TextBox_TextChanged;
-            Woth3Items.TextChanged += TextBox_TextChanged;
-            Woth4Items.TextChanged += TextBox_TextChanged;
-            Woth5Items.TextChanged += TextBox_TextChanged;
-
-            Barren1.TextChanged += Location_TextChanged;
-            Barren2.TextChanged += Location_TextChanged;
-            Barren3.TextChanged += Location_TextChanged;
-
-            Skulls30.TextChanged += TextBox_TextChanged;
-            Skulls40.TextChanged += TextBox_TextChanged;
-            Skulls50.TextChanged += TextBox_TextChanged;
-            OOTSong.TextChanged += TextBox_TextChanged;
-            Frogs2.TextChanged += TextBox_TextChanged;
-            SkullMask.TextChanged += TextBox_TextChanged;
-
-            Sometimes1.TextChanged += TextBox_TextChanged;
-            Sometimes2.TextChanged += TextBox_TextChanged;
-            Sometimes3.TextChanged += TextBox_TextChanged;
-            Sometimes4.TextChanged += TextBox_TextChanged;
-            Sometimes5.TextChanged += TextBox_TextChanged;
-            Sometimes6.TextChanged += TextBox_TextChanged;
+            // Determine Hint Settings - default is League
+            hints = new HintDistributionSettings(League);
+            SetHints();
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
             {
                 IsEnabled = false
             };
+        }
+
+        private void SetHints()
+        {
+            var textBoxes = Main.Children.OfType<TextBox>();
+
+            // SET WOTH
+            for (int i = 1; i <= hints.NumberOfWoths; i++)
+            {
+                var wothBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}", StringComparison.OrdinalIgnoreCase));
+                var wothItemBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}ITEMS", StringComparison.OrdinalIgnoreCase));
+
+                HintAssist.SetHint(wothBox, $"WOTH {i}");
+                wothBox.TextChanged += Location_TextChanged;
+                wothItemBox.TextChanged += TextBox_TextChanged;
+            }
+
+            // SET OPPORTUNITY
+            for (int i = 1; i <= hints.NumberOfOpportunity; i++)
+            {
+                var wothBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i + hints.NumberOfWoths}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(wothBox, $"Opportunity {i}");
+                wothBox.TextChanged += Location_TextChanged;
+            }
+
+            // SET BARREN
+            for (int i = 1; i <= hints.NumberOfBarren; i++)
+            {
+                var barrenBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"BARREN{i}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(barrenBox, $"Barren {i}");
+                barrenBox.TextChanged += Location_TextChanged;
+            }
+
+            // SET SOMETIMES
+            for (int i = 1; i <= hints.NumberOfSometimes; i++)
+            {
+                var sometimesBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"SOMETIMES{i}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(sometimesBox, $"Sometimes {i}");
+                sometimesBox.TextChanged += TextBox_TextChanged;
+            }
+
+            // I'll have to figure out a better way to do this later, but for now the only difference between League and DDR is Biggoron (DDR) and 6 Sometimes (League)
+            if (hints.Skulls)
+            {
+                Skulls30.TextChanged += TextBox_TextChanged;
+                Skulls40.TextChanged += TextBox_TextChanged;
+                Skulls50.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.SkullMask)
+            {
+                SkullMask.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.Frogs2)
+            {
+                Frogs2.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.OOTSong)
+            {
+                OOTSong.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.Biggoron)
+            {
+                HintAssist.SetHint(Sometimes6, "Biggoron");
+                Sometimes6.TextChanged += TextBox_TextChanged;
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -130,8 +176,8 @@ namespace ZeldaItemTracker
             if (image.Name.StartsWith("WOTH", StringComparison.OrdinalIgnoreCase))
             {
                 var wothNumber = image.Name.Substring(4, 1);
-                var currentSlot = image.Name.Substring(image.Name.Length-1, 1);
-                
+                var currentSlot = image.Name.Substring(image.Name.Length - 1, 1);
+
                 var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
                 var firstSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM1", StringComparison.OrdinalIgnoreCase));
                 var secondSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM2", StringComparison.OrdinalIgnoreCase));
@@ -141,11 +187,11 @@ namespace ZeldaItemTracker
                 {
                     case "1":
                         // Check if 2 and 3 are active
-                        if(secondSlot.Source != null)
+                        if (secondSlot.Source != null)
                         {
                             firstSlot.Source = secondSlot.Source;
 
-                            if(thirdSlot.Source != null)
+                            if (thirdSlot.Source != null)
                             {
                                 secondSlot.Source = thirdSlot.Source;
                                 thirdSlot.Source = null;
@@ -160,7 +206,7 @@ namespace ZeldaItemTracker
 
                     case "2":
                         // Check if 3 is active
-                        if(thirdSlot.Source != null)
+                        if (thirdSlot.Source != null)
                         {
                             secondSlot.Source = thirdSlot.Source;
                             thirdSlot.Source = null;
@@ -541,7 +587,7 @@ namespace ZeldaItemTracker
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
-        {       
+        {
             if (timer.IsEnabled)
             {
                 timer.Stop();
@@ -563,6 +609,21 @@ namespace ZeldaItemTracker
             {
                 timer.Stop();
                 start = DateTime.Now;
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && e.Key != Key.LeftCtrl && e.Key != Key.LeftShift)
+            {
+                var allHints = new HintDistributionSettings().AllHints();
+
+                var relevantHints = allHints.SingleOrDefault(hints => hints.KeyBind == e.Key);
+                if(relevantHints != null)
+                {
+                    hints = relevantHints;
+                    SetHints();
+                }
             }
         }
     }

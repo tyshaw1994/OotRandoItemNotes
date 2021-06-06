@@ -16,7 +16,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         Title="MainWindow" Height="1025" Width="633"
-        MouseLeftButtonDown="Card_MouseLeftButtonDown">
+        MouseLeftButtonDown="Card_MouseLeftButtonDown"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
