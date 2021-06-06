@@ -28,7 +28,9 @@ namespace ZeldaItemTracker
             { "ss", "Silver Scale" },
             { "gs", "Gold Scale" },
             { "lot", "Lens of Truth" },
-            { "fw", "Farore's Wind" }
+            { "fw", "Farore's Wind" },
+            { "sk", "smallkey" },
+            { "bk", "bigkey" }
         };
     }
 }

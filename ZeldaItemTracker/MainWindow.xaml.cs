@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace ZeldaItemTracker
 {
@@ -13,53 +15,218 @@ namespace ZeldaItemTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal List<LocationNotes> _locationNotes;
+        DispatcherTimer timer;
+        DateTime start;
+        HintDistributionSettings hints;
+        const string League = "league";
+        const string DDR = "ddr";
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _locationNotes = NotesManager.BaseLocationNotes;
+            // Determine Hint Settings - default is League
+            hints = new HintDistributionSettings(League);
+            SetHints();
 
-            foreach (var locationNote in _locationNotes)
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
             {
-                if (locationNote != _locationNotes.Last())
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n\n";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n\n";
-                    }
-                }
-                else
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}";
-                    }
-                }
+                IsEnabled = false
+            };
+        }
+
+        private void SetHints()
+        {
+            var textBoxes = Main.Children.OfType<TextBox>();
+
+            // SET WOTH
+            for (int i = 1; i <= hints.NumberOfWoths; i++)
+            {
+                var wothBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}", StringComparison.OrdinalIgnoreCase));
+                var wothItemBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}ITEMS", StringComparison.OrdinalIgnoreCase));
+
+                HintAssist.SetHint(wothBox, $"WOTH {i}");
+                wothBox.TextChanged += Location_TextChanged;
+                wothItemBox.TextChanged += TextBox_TextChanged;
             }
 
-            Woth1.TextChanged += Woth1_TextChanged;
-            Woth2.TextChanged += Woth2_TextChanged;
-            Woth3.TextChanged += Woth3_TextChanged;
-            Woth4.TextChanged += Woth4_TextChanged;
+            // SET OPPORTUNITY
+            for (int i = 1; i <= hints.NumberOfOpportunity; i++)
+            {
+                var wothBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i + hints.NumberOfWoths}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(wothBox, $"Opportunity {i}");
+                wothBox.TextChanged += Location_TextChanged;
+            }
 
-            Biggoron.TextChanged += Biggoron_TextChanged;
-            Skulls30.TextChanged += Skulls30_TextChanged;
-            Skulls40.TextChanged += Skulls40_TextChanged;
-            Skulls50.TextChanged += Skulls50_TextChanged;
-            OOTSong.TextChanged += OOTSong_TextChanged;
-            Frogs2.TextChanged += Frogs2_TextChanged;
+            // SET BARREN
+            for (int i = 1; i <= hints.NumberOfBarren; i++)
+            {
+                var barrenBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"BARREN{i}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(barrenBox, $"Barren {i}");
+                barrenBox.TextChanged += Location_TextChanged;
+            }
 
-            WothItems.TextChanged += WothItems_TextChanged;
+            // SET SOMETIMES
+            for (int i = 1; i <= hints.NumberOfSometimes; i++)
+            {
+                var sometimesBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"SOMETIMES{i}", StringComparison.OrdinalIgnoreCase));
+                HintAssist.SetHint(sometimesBox, $"Sometimes {i}");
+                sometimesBox.TextChanged += TextBox_TextChanged;
+            }
+
+            // I'll have to figure out a better way to do this later, but for now the only difference between League and DDR is Biggoron (DDR) and 6 Sometimes (League)
+            if (hints.Skulls)
+            {
+                Skulls30.TextChanged += TextBox_TextChanged;
+                Skulls40.TextChanged += TextBox_TextChanged;
+                Skulls50.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.SkullMask)
+            {
+                SkullMask.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.Frogs2)
+            {
+                Frogs2.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.OOTSong)
+            {
+                OOTSong.TextChanged += TextBox_TextChanged;
+            }
+
+            if (hints.Biggoron)
+            {
+                HintAssist.SetHint(Sometimes6, "Biggoron");
+                Sometimes6.TextChanged += TextBox_TextChanged;
+            }
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Timer.Text = (DateTime.Now - start).ToString(@"hh\:mm\:ss");
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            // Figure out which, if any, images are activated
+            if (textBox.Name.Contains("WOTH", StringComparison.OrdinalIgnoreCase) && textBox.Name.Contains("ITEM", StringComparison.OrdinalIgnoreCase))
+            {
+                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
+                if (imageName == null)
+                    return;
+
+                // 3 Item slots per WOTH
+                var wothNumber = textBox.Name.Substring(4, 1);
+                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
+                var itemSlotToUse = relevantItemSlots.FirstOrDefault(x => x.Source == null);
+
+                if (itemSlotToUse != null)
+                {
+                    itemSlotToUse.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = "";
+            }
+            else if (textBox.Name.Contains("SOMETIMES", StringComparison.OrdinalIgnoreCase))
+            {
+                var itemText = textBox.Text.Split(" ").Last();
+
+                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(itemText)).Value;
+                if (imageName == null)
+                    return;
+
+                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
+                if (relevantItemSlot != null)
+                {
+                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = textBox.Text.Substring(0, textBox.Text.Length - itemText.Length);
+            }
+            else
+            {
+                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
+                if (imageName == null)
+                    return;
+
+                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
+                if (relevantItemSlot != null)
+                {
+                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = "";
+            }
+        }
+
+        private void HintItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount != 2)
+                return;
+
+            var image = sender as Image;
+            image.Source = null;
+
+            // Shift images if needed (only for WOTH for now)
+            if (image.Name.StartsWith("WOTH", StringComparison.OrdinalIgnoreCase))
+            {
+                var wothNumber = image.Name.Substring(4, 1);
+                var currentSlot = image.Name.Substring(image.Name.Length - 1, 1);
+
+                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
+                var firstSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM1", StringComparison.OrdinalIgnoreCase));
+                var secondSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM2", StringComparison.OrdinalIgnoreCase));
+                var thirdSlot = relevantItemSlots.Single(x => x.Name.Equals($"WOTH{wothNumber}ITEM3", StringComparison.OrdinalIgnoreCase));
+
+                switch (currentSlot)
+                {
+                    case "1":
+                        // Check if 2 and 3 are active
+                        if (secondSlot.Source != null)
+                        {
+                            firstSlot.Source = secondSlot.Source;
+
+                            if (thirdSlot.Source != null)
+                            {
+                                secondSlot.Source = thirdSlot.Source;
+                                thirdSlot.Source = null;
+                            }
+                            else
+                            {
+                                secondSlot.Source = null;
+                            }
+                        }
+
+                        break;
+
+                    case "2":
+                        // Check if 3 is active
+                        if (thirdSlot.Source != null)
+                        {
+                            secondSlot.Source = thirdSlot.Source;
+                            thirdSlot.Source = null;
+                        }
+
+                        break;
+
+                    case "3":
+                        // Do nothing
+                        break;
+
+                    default:
+                        // Shouldn't happen
+                        break;
+                }
+            }
+            else
+            {
+                image.Source = null;
+            }
         }
 
         private void ResetDungeons_Click(object sender, RoutedEventArgs e)
@@ -116,153 +283,15 @@ namespace ZeldaItemTracker
             }
         }
 
-        private void WothItems_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(WothItems.Text))
-            {
-                return;
-            }
-
-            var wothLocations = WothItems.Text.Split("\n\n\n");
-
-            for (int i = 0; i < _locationNotes.Count; i++)
-            {
-                _locationNotes[i] = new LocationNotes(wothLocations[i]);
-            }
-        }
-
         private void Card_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
-        private void Woth_KeyDown(object sender, KeyEventArgs e)
+        private void Location_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                ReprintNotes();
-            }
-        }
-
-        private void Woth1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth1.Text);
-
-            _locationNotes[0].LocationName = fullName;
-
-            if (fullName != Woth1.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth1.Text = fullName;
-        }
-
-        private void Woth2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth2.Text);
-
-            _locationNotes[1].LocationName = fullName;
-
-            if (fullName != Woth2.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth2.Text = fullName;
-        }
-
-        private void Woth3_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth3.Text);
-
-            _locationNotes[2].LocationName = fullName;
-
-            if (fullName != Woth3.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth3.Text = fullName;
-        }
-
-        private void Woth4_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var fullName = NotesManager.GetFullName(Woth4.Text);
-
-            _locationNotes[3].LocationName = fullName;
-
-            if (fullName != Woth4.Text)
-            {
-                ReprintNotes();
-            }
-
-            Woth4.Text = fullName;
-        }
-
-        private void Frogs2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Frogs2.Text = NotesManager.GetFullName(Frogs2.Text);
-        }
-
-        private void OOTSong_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            OOTSong.Text = NotesManager.GetFullName(OOTSong.Text);
-        }
-
-        private void Skulls50_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls50.Text = NotesManager.GetFullName(Skulls50.Text);
-        }
-
-        private void Skulls40_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls40.Text = NotesManager.GetFullName(Skulls40.Text);
-        }
-
-        private void Skulls30_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Skulls30.Text = NotesManager.GetFullName(Skulls30.Text);
-        }
-
-        private void Biggoron_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Biggoron.Text = NotesManager.GetFullName(Biggoron.Text);
-        }
-
-        private void ReprintNotes()
-        {
-            WothItems.TextChanged -= WothItems_TextChanged;
-
-            WothItems.Text = "";
-
-            foreach (var locationNote in _locationNotes)
-            {
-                if (locationNote != _locationNotes.Last())
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}\n\n\n";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}\n\n\n";
-                    }
-                }
-                else
-                {
-                    if (locationNote.LocationName.EndsWith(' '))
-                    {
-                        WothItems.Text += $"{locationNote.LocationName}items: {locationNote.Items}";
-                    }
-                    else
-                    {
-                        WothItems.Text += $"{locationNote.LocationName} items: {locationNote.Items}";
-                    }
-                }
-            }
-
-            WothItems.TextChanged += WothItems_TextChanged;
+            var textBox = sender as TextBox;
+            textBox.Text = NotesManager.GetFullName(textBox.Text);
         }
 
         private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -492,86 +521,108 @@ namespace ZeldaItemTracker
             if (e.Key != Key.Enter)
                 return;
 
-            var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
-            var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
-            var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
-
-            if (dungeonRewards.Count <= 6)
+            try
             {
-                int index = 0;
-                foreach (var dungeonReward in dungeonRewards)
+                var dungeonRewards = DungeonHelper.GetDungeonsFromString(Dungeons.Text);
+                var medallionLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && x.Name.Contains("label")).ToList();
+                var medallions = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("medallion") && !x.Name.Contains("label")).ToList();
+
+                if (dungeonRewards.Count <= 6)
                 {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
+                    int index = 0;
+                    foreach (var dungeonReward in dungeonRewards)
+                    {
+                        var medallionLabel = medallionLabels[index];
+                        var medallion = medallions[index];
 
-                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
+                        if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                        }
+                        else
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                        }
 
-                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
+                        if (string.IsNullOrEmpty(dungeonReward.RewardName))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
+                        }
 
-                    index++;
+                        index++;
+                    }
                 }
+                else
+                {
+                    int index = 0;
+                    foreach (var dungeonReward in dungeonRewards.Take(6))
+                    {
+                        var medallionLabel = medallionLabels[index];
+                        var medallion = medallions[index];
+
+                        if (string.IsNullOrEmpty(dungeonReward.DungeonName))
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
+                        }
+                        else
+                        {
+                            medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
+                        }
+
+                        index++;
+                    }
+
+                    var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
+                    var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
             }
             else
             {
-                int index = 0;
-                foreach (var dungeonReward in dungeonRewards.Take(6))
+                timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
                 {
-                    var medallionLabel = medallionLabels[index];
-                    var medallion = medallions[index];
+                    IsEnabled = true
+                };
 
-                    if (string.IsNullOrEmpty(dungeonReward.DungeonName))
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/unknown-small.png", System.UriKind.Relative));
-                    }
-                    else
-                    {
-                        medallionLabel.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.DungeonName}.png", System.UriKind.Relative));
-                    }
+                start = DateTime.Now;
+            }
+        }
 
-                    if (string.IsNullOrEmpty(dungeonReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        medallion.Source = new BitmapImage(new System.Uri(@$"/images/{dungeonReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
+                start = DateTime.Now;
+            }
+        }
 
-                    index++;
-                }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && e.Key != Key.LeftCtrl && e.Key != Key.LeftShift)
+            {
+                var allHints = new HintDistributionSettings().AllHints();
 
-                var stoneLabels = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && x.Name.Contains("label")).ToList();
-                var stones = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith("stone") && !x.Name.Contains("label")).ToList();
-
-                index = 0;
-                foreach (var uselessReward in dungeonRewards.TakeLast(3))
+                var relevantHints = allHints.SingleOrDefault(hints => hints.KeyBind == e.Key);
+                if(relevantHints != null)
                 {
-                    var stone = stones[index];
-
-                    if (string.IsNullOrEmpty(uselessReward.RewardName))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        stone.Source = new BitmapImage(new System.Uri(@$"/images/{uselessReward.RewardName}-disabled.png", System.UriKind.Relative));
-                    }
-
-                    index++;
+                    hints = relevantHints;
+                    SetHints();
                 }
             }
         }

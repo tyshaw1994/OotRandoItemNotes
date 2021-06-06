@@ -51,6 +51,8 @@
     <None Remove="images\arrows.png" />
     <None Remove="images\arrowsleft.png" />
     <None Remove="images\arrowsright.png" />
+    <None Remove="images\bigkey.png" />
+    <None Remove="images\bluetunic.png" />
     <None Remove="images\blue_note-check.png" />
     <None Remove="images\blue_note-disabled.png" />
     <None Remove="images\blue_note-disabledcheck.png" />
@@ -88,6 +90,7 @@
     <None Remove="images\epona-disabled.png" />
     <None Remove="images\epona-disabledcheck.png" />
     <None Remove="images\epona.png" />
+    <None Remove="images\farore.png" />
     <None Remove="images\fire-small.png" />
     <None Remove="images\fire.png" />
     <None Remove="images\fireandlightarrows-disabled.png" />
@@ -113,6 +116,7 @@
     <None Remove="images\hoverboots.png" />
     <None Remove="images\ironboots.png" />
     <None Remove="images\jabu.png" />
+    <None Remove="images\lens.png" />
     <None Remove="images\lift-disabled.png" />
     <None Remove="images\lift.png" />
     <None Remove="images\lift1-disabled.png" />
@@ -124,6 +128,7 @@
     <None Remove="images\lightmedallion-disabled.png" />
     <None Remove="images\lightmedallion.png" />
     <None Remove="images\longshot.png" />
+    <None Remove="images\magic1.png" />
     <None Remove="images\mirror-disabled.png" />
     <None Remove="images\mirror.png" />
     <None Remove="images\orange_note-check.png" />
@@ -134,6 +139,7 @@
     <None Remove="images\purple_note-disabled.png" />
     <None Remove="images\purple_note-disabledcheck.png" />
     <None Remove="images\purple_note.png" />
+    <None Remove="images\redtunic.png" />
     <None Remove="images\red_note-check.png" />
     <None Remove="images\red_note-disabled.png" />
     <None Remove="images\red_note-disabledcheck.png" />
@@ -172,6 +178,8 @@
     <None Remove="images\sling4.png" />
     <None Remove="images\sling5.png" />
     <None Remove="images\slingshot.png" />
+    <None Remove="images\smallkey.png" />
+    <None Remove="images\sold.png" />
     <None Remove="images\songofstorms-check.png" />
     <None Remove="images\songofstorms-disabled.png" />
     <None Remove="images\songofstorms-disabledcheck.png" />
@@ -292,6 +300,12 @@
     <Content Include="images\arrowsright.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\bigkey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bluetunic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\blue_note-check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -388,6 +402,9 @@
     <Content Include="images\epona.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\farore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\fire-small.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -445,6 +462,9 @@
     <Content Include="images\jabu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\lens.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\lift-disabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -464,6 +484,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\lightmedallion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\magic1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\mirror-disabled.png">
@@ -494,6 +517,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\purple_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\redtunic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\red_note-check.png">
@@ -587,6 +613,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\sling3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\smallkey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\songofstorms-check.png">
