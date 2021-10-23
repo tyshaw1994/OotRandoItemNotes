@@ -270,8 +270,8 @@
             materialDesign:HintAssist.Hint="WOTH 1"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" Margin="10,340,0,0" />
         <TextBox Name="Woth2"
-            materialDesign:HintAssist.Hint="WOTH 2"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,410,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" RenderTransformOrigin="0.439,0.467" />
+            materialDesign:HintAssist.Hint="WOTH 2" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,410,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
         <TextBox Name="Woth3"
             materialDesign:HintAssist.Hint="WOTH 3"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,480,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
@@ -281,6 +281,12 @@
         <TextBox Name="Woth5"
             materialDesign:HintAssist.Hint="WOTH 5"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,620,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
+
+        <Image x:Name="Goal1" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="20" Height="20" Margin="60,330,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Image x:Name="Goal2" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="20" Height="20" Margin="60,400,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Image x:Name="Goal3" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="20" Height="20" Margin="60,470,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Image x:Name="Goal4" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="20" Height="20" Margin="60,540,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Image x:Name="Goal5" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="20" Height="20" Margin="60,610,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
 
         <TextBox Name="Woth1Items"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" Margin="220,340,0,0" />
@@ -376,7 +382,7 @@
             materialDesign:HintAssist.Hint="Sometimes 5"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,760,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />
         <Image x:Name="Sometimes5Item" MouseLeftButtonDown="HintItem_MouseLeftButtonDown" Width="50" Height="50" Margin="555,750,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        
+
         <TextBox Name ="Sometimes6"
             materialDesign:HintAssist.Hint="Sometimes 6"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="430,830,0,0" FontSize="18" HorizontalAlignment="Left" Width="190" Height="44" VerticalAlignment="Top" />

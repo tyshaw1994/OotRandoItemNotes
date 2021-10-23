@@ -2,9 +2,9 @@
 
 namespace ZeldaItemTracker
 {
-    public static class DungeonConstants
+    public static class Dungeons
     {
-        public static Dictionary<string, string> Dungeons = new Dictionary<string, string>
+        public static Dictionary<string, string> Names = new Dictionary<string, string>
         {
             { "dt", "deku" },
             { "dc", "dodongo" },

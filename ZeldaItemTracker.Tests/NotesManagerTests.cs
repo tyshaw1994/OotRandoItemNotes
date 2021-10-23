@@ -20,7 +20,7 @@ namespace ZeldaItemTracker.Tests
         [Fact]
         public void GetFullName_Location_AbbreviationInNameMap_ReturnsFullName()
         {
-            foreach (var location in LocationNames.LocationNameMaps)
+            foreach (var location in Locations.LocationNameMaps)
             {
                 var result = NotesManager.GetFullName(location.Key);
 
@@ -31,7 +31,7 @@ namespace ZeldaItemTracker.Tests
         [Fact]
         public void GetFullName_Item_AbbreviationInNameMap_ReturnsFullName()
         {
-            foreach (var item in ItemNames.ItemNameMaps)
+            foreach (var item in Items.ItemNameMaps)
             {
                 var result = NotesManager.GetFullName(item.Key);
 
@@ -42,7 +42,7 @@ namespace ZeldaItemTracker.Tests
         [Fact]
         public void GetFullName_Song_AbbreviationInNameMap_ReturnsFullName()
         {
-            foreach (var song in SongNames.SongNameMaps)
+            foreach (var song in Songs.SongNameMaps)
             {
                 var result = NotesManager.GetFullName(song.Key);
 

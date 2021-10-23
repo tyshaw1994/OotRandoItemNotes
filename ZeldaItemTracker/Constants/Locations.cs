@@ -5,7 +5,7 @@ namespace ZeldaItemTracker
     /// <summary>
     /// Static class for mapping location abbreviations to their full names.
     /// </summary>
-    public static class LocationNames
+    public static class Locations
     {
         /// <summary>
         /// Maps location abbreviations to their full names.
