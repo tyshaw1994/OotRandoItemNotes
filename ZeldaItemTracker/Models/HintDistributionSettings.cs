@@ -36,11 +36,11 @@ namespace ZeldaItemTracker
                     NumberOfGoals = 5,
                     NumberOfOpportunity = 0,
                     NumberOfBarren = 3,
-                    NumberOfSometimes = 6,
+                    NumberOfSometimes = 5,
                     Skulls = true,
                     SkullMask = true,
                     OOTSong = true,
-                    Biggoron = false,
+                    Biggoron = true,
                     Frogs2 = true
                 },
                 new HintDistributionSettings
