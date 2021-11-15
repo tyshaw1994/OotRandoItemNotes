@@ -9,7 +9,7 @@ Typically when taking notes during a seed you will want to write out abbreviatio
 and as such most people don't usually show their notes on stream. I wanted to be able to have all the information that I have available to a stream viewer, as well as control over my own tracker,
 so I created this.
 
-# Usage
+# Running
 I am currently not providing pre-built releases or help with running the tracker. It was built using .NET Core 3.1 so you should probably just need the sdk to be able to clone the repo, build it from source, and run it yourself.
 
 # Credits
