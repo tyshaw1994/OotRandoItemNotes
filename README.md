@@ -9,6 +9,11 @@ Typically when taking notes during a seed you will want to write out abbreviatio
 and as such most people don't usually show their notes on stream. I wanted to be able to have all the information that I have available to a stream viewer, as well as control over my own tracker,
 so I created this.
 
+# Credits
+- Images were exported from Emotracker package "OoT Rando Item Trackers" by Raikaru and atz
+  - https://emotracker.net/
+- Boss images were taken taken from ArthurOudini's Discord server
+
 # Features
 - Item and Song tracking similar to Emotracker (Left click on an item to highlight it, right click on it to remove the highlight. Left click for Iron Boots, right click for Hover Boots)
 - Text-based dungeon entry (found at the bottom of the tracker, see tables below for shortcodes for dungeons)
