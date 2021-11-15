@@ -2,7 +2,7 @@
 
 namespace ZeldaItemTracker
 {
-    public static class SongNames
+    public static class Songs
     {
         public static Dictionary<string, string> SongNameMaps => new Dictionary<string, string>
         {

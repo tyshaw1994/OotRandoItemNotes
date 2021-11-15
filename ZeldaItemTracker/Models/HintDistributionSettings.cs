@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace ZeldaItemTracker
@@ -17,6 +18,7 @@ namespace ZeldaItemTracker
                     Name = "league",
                     KeyBind = Key.L,
                     NumberOfWoths = 5,
+                    NumberOfGoals = 0,
                     NumberOfOpportunity = 0,
                     NumberOfBarren = 3,
                     NumberOfSometimes = 6,
@@ -28,9 +30,25 @@ namespace ZeldaItemTracker
                 },
                 new HintDistributionSettings
                 {
+                    Name = "s5",
+                    KeyBind = Key.S,
+                    NumberOfWoths = 0,
+                    NumberOfGoals = 5,
+                    NumberOfOpportunity = 0,
+                    NumberOfBarren = 3,
+                    NumberOfSometimes = 5,
+                    Skulls = true,
+                    SkullMask = true,
+                    OOTSong = true,
+                    Biggoron = true,
+                    Frogs2 = true
+                },
+                new HintDistributionSettings
+                {
                     Name = "ddr",
                     KeyBind = Key.D,
                     NumberOfWoths = 2,
+                    NumberOfGoals = 0,
                     NumberOfOpportunity = 3,
                     NumberOfBarren = 3,
                     NumberOfSometimes = 5,
@@ -45,42 +63,9 @@ namespace ZeldaItemTracker
 
         public HintDistributionSettings() { }
 
-        public HintDistributionSettings(string name)
+        public HintDistributionSettings GetSettingsByName(string name)
         {
-            Name = name;
-
-            switch (name.ToLower())
-            {
-                case "league":
-                    KeyBind = Key.L;
-                    NumberOfWoths = 5;
-                    NumberOfOpportunity = 0;
-                    NumberOfBarren = 3;
-                    NumberOfSometimes = 6;
-                    Skulls = true;
-                    SkullMask = true;
-                    OOTSong = true;
-                    Biggoron = false;
-                    Frogs2 = true;
-                    break;
-
-                case "ddr":
-                    KeyBind = Key.D;
-                    NumberOfWoths = 2;
-                    NumberOfOpportunity = 3;
-                    NumberOfBarren = 3;
-                    NumberOfSometimes = 5;
-                    Skulls = true;
-                    SkullMask = true;
-                    OOTSong = true;
-                    Biggoron = true;
-                    Frogs2 = true;
-
-                    break;
-                default:
-                    break;
-
-            }
+            return AllHints().SingleOrDefault(x => x.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
@@ -97,6 +82,11 @@ namespace ZeldaItemTracker
         /// The number of Way of the Hero hints available.
         /// </summary>
         public int NumberOfWoths { get; set; }
+
+        /// <summary>
+        /// The number of Goal hints available.
+        /// </summary>
+        public int NumberOfGoals { get; set; }
 
         /// <summary>
         /// The number of Opportunity/Path of the Hero hints available.

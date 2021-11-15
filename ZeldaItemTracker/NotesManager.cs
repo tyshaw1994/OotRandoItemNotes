@@ -45,17 +45,17 @@ namespace ZeldaItemTracker
         /// </summary>
         public static string GetFullName(string abbreviation)
         {
-            if (LocationNames.LocationNameMaps.TryGetValue(abbreviation, out var locationName))
+            if (Locations.LocationNameMaps.TryGetValue(abbreviation, out var locationName))
             {
                 return locationName;
             }
 
-            if (ItemNames.ItemNameMaps.TryGetValue(abbreviation, out var itemName))
+            if (Items.ItemNameMaps.TryGetValue(abbreviation, out var itemName))
             {
                 return itemName;
             }
 
-            if (SongNames.SongNameMaps.TryGetValue(abbreviation, out var songName))
+            if (Songs.SongNameMaps.TryGetValue(abbreviation, out var songName))
             {
                 return songName;
             }

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using ZeldaItemTracker.Constants;
 
 namespace ZeldaItemTracker
 {
@@ -20,13 +21,14 @@ namespace ZeldaItemTracker
         HintDistributionSettings hints;
         const string League = "league";
         const string DDR = "ddr";
+        const string S5 = "s5";
 
         public MainWindow()
         {
             InitializeComponent();
 
-            // Determine Hint Settings - default is League
-            hints = new HintDistributionSettings(League);
+            // Determine Hint Settings - default is S5
+            hints = new HintDistributionSettings().GetSettingsByName(S5);
             SetHints();
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0), DispatcherPriority.Background, Timer_Tick, Dispatcher.CurrentDispatcher)
@@ -48,6 +50,17 @@ namespace ZeldaItemTracker
                 HintAssist.SetHint(wothBox, $"WOTH {i}");
                 wothBox.TextChanged += Location_TextChanged;
                 wothItemBox.TextChanged += TextBox_TextChanged;
+            }
+
+            // SET GOAL
+            for (int i = 1; i <= hints.NumberOfGoals; i++)
+            {
+                var goalBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}", StringComparison.OrdinalIgnoreCase));
+                var goalItemBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}ITEMS", StringComparison.OrdinalIgnoreCase));
+
+                HintAssist.SetHint(goalBox, $"Goal {i}");
+                goalBox.TextChanged += Goal_TextChanged;
+                goalItemBox.TextChanged += TextBox_TextChanged;
             }
 
             // SET OPPORTUNITY
@@ -107,61 +120,6 @@ namespace ZeldaItemTracker
         private void Timer_Tick(object sender, EventArgs e)
         {
             Timer.Text = (DateTime.Now - start).ToString(@"hh\:mm\:ss");
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-
-            // Figure out which, if any, images are activated
-            if (textBox.Name.Contains("WOTH", StringComparison.OrdinalIgnoreCase) && textBox.Name.Contains("ITEM", StringComparison.OrdinalIgnoreCase))
-            {
-                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
-                if (imageName == null)
-                    return;
-
-                // 3 Item slots per WOTH
-                var wothNumber = textBox.Name.Substring(4, 1);
-                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
-                var itemSlotToUse = relevantItemSlots.FirstOrDefault(x => x.Source == null);
-
-                if (itemSlotToUse != null)
-                {
-                    itemSlotToUse.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
-                }
-
-                textBox.Text = "";
-            }
-            else if (textBox.Name.Contains("SOMETIMES", StringComparison.OrdinalIgnoreCase))
-            {
-                var itemText = textBox.Text.Split(" ").Last();
-
-                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(itemText)).Value;
-                if (imageName == null)
-                    return;
-
-                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
-                if (relevantItemSlot != null)
-                {
-                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
-                }
-
-                textBox.Text = textBox.Text.Substring(0, textBox.Text.Length - itemText.Length);
-            }
-            else
-            {
-                var imageName = ItemImageNames.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
-                if (imageName == null)
-                    return;
-
-                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
-                if (relevantItemSlot != null)
-                {
-                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
-                }
-
-                textBox.Text = "";
-            }
         }
 
         private void HintItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -292,6 +250,87 @@ namespace ZeldaItemTracker
         {
             var textBox = sender as TextBox;
             textBox.Text = NotesManager.GetFullName(textBox.Text);
+        }
+
+        private void Goal_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Check to see if there's a reward keyed in
+            var textBox = sender as TextBox;
+
+            // Loop over the entire string until we find a match or get to the end.
+            for (int i = 1; i <= textBox.Text.Length; i++)
+            {
+                string fileName = "";
+                if (Rewards.RewardImageMaps.TryGetValue(textBox.Text.Substring(0, i), out fileName) || Bosses.BossImageMaps.TryGetValue(textBox.Text.Substring(0, i), out fileName))
+                {
+                    var index = textBox.Name.Last().ToString();
+
+                    var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.Equals($"Goal{index}", StringComparison.OrdinalIgnoreCase));
+                    if (relevantItemSlot != null)
+                    {
+                        relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{fileName}.png", UriKind.Relative));
+                    }
+
+                    textBox.Text = textBox.Text.Substring(i);
+                }
+            }
+
+            Location_TextChanged(sender, e);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            // Figure out which, if any, images are activated
+            if (textBox.Name.Contains("WOTH", StringComparison.OrdinalIgnoreCase) && textBox.Name.Contains("ITEM", StringComparison.OrdinalIgnoreCase))
+            {
+                var imageName = Items.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
+                if (imageName == null)
+                    return;
+
+                // 3 Item slots per WOTH
+                var wothNumber = textBox.Name.Substring(4, 1);
+                var relevantItemSlots = Main.Children.OfType<Image>().Where(x => x.Name.StartsWith($"WOTH{wothNumber}", StringComparison.OrdinalIgnoreCase));
+                var itemSlotToUse = relevantItemSlots.FirstOrDefault(x => x.Source == null);
+
+                if (itemSlotToUse != null)
+                {
+                    itemSlotToUse.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = "";
+            }
+            else if (textBox.Name.Contains("SOMETIMES", StringComparison.OrdinalIgnoreCase))
+            {
+                var itemText = textBox.Text.Split(" ").Last();
+
+                var imageName = Items.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(itemText)).Value;
+                if (imageName == null)
+                    return;
+
+                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
+                if (relevantItemSlot != null)
+                {
+                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = textBox.Text.Substring(0, textBox.Text.Length - itemText.Length);
+            }
+            else
+            {
+                var imageName = Items.ItemImageMaps.FirstOrDefault(x => x.Key.Equals(textBox.Text)).Value;
+                if (imageName == null)
+                    return;
+
+                var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.StartsWith(textBox.Name, StringComparison.OrdinalIgnoreCase));
+                if (relevantItemSlot != null)
+                {
+                    relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{imageName}.png", UriKind.Relative));
+                }
+
+                textBox.Text = "";
+            }
         }
 
         private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -619,7 +658,7 @@ namespace ZeldaItemTracker
                 var allHints = new HintDistributionSettings().AllHints();
 
                 var relevantHints = allHints.SingleOrDefault(hints => hints.KeyBind == e.Key);
-                if(relevantHints != null)
+                if (relevantHints != null)
                 {
                     hints = relevantHints;
                     SetHints();
