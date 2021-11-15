@@ -6,6 +6,7 @@ namespace ZeldaItemTracker
     {
         public static Dictionary<string, string> ItemNameMaps => new Dictionary<string, string>
         {
+            { "ks", "Kokiri Sword" },
             { "bb", "Bomb Bag" },
             { "hs", "Hookshot" },
             { "ls", "Longshot" },
@@ -35,6 +36,7 @@ namespace ZeldaItemTracker
 
         public static Dictionary<string, string> ItemImageMaps => new Dictionary<string, string>
         {
+            { "ks", "sword" },
             { "bb", "bomb" },
             { "hs", "hookshot" },
             { "ls", "hookshot2" },

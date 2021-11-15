@@ -51,6 +51,7 @@
     <None Remove="images\arrows.png" />
     <None Remove="images\arrowsleft.png" />
     <None Remove="images\arrowsright.png" />
+    <None Remove="images\barinade.png" />
     <None Remove="images\bigkey.png" />
     <None Remove="images\bluetunic.png" />
     <None Remove="images\blue_note-check.png" />
@@ -63,6 +64,7 @@
     <None Remove="images\bomb3.png" />
     <None Remove="images\bomb4.png" />
     <None Remove="images\bombchu.png" />
+    <None Remove="images\bongo.png" />
     <None Remove="images\boomerang-disabled.png" />
     <None Remove="images\boomerang.png" />
     <None Remove="images\boots-disabled.png" />
@@ -103,6 +105,7 @@
     <None Remove="images\forestmedallion-disabled.png" />
     <None Remove="images\forestmedallion.png" />
     <None Remove="images\free.png" />
+    <None Remove="images\gohma.png" />
     <None Remove="images\green_note-check.png" />
     <None Remove="images\green_note-disabled.png" />
     <None Remove="images\green_note-disabledcheck.png" />
@@ -116,6 +119,7 @@
     <None Remove="images\hoverboots.png" />
     <None Remove="images\ironboots.png" />
     <None Remove="images\jabu.png" />
+    <None Remove="images\kingdong.png" />
     <None Remove="images\lens.png" />
     <None Remove="images\lift-disabled.png" />
     <None Remove="images\lift.png" />
@@ -131,10 +135,12 @@
     <None Remove="images\magic1.png" />
     <None Remove="images\mirror-disabled.png" />
     <None Remove="images\mirror.png" />
+    <None Remove="images\morpha.png" />
     <None Remove="images\orange_note-check.png" />
     <None Remove="images\orange_note-disabled.png" />
     <None Remove="images\orange_note-disabledcheck.png" />
     <None Remove="images\orange_note.png" />
+    <None Remove="images\phantomganon.png" />
     <None Remove="images\purple_note-check.png" />
     <None Remove="images\purple_note-disabled.png" />
     <None Remove="images\purple_note-disabledcheck.png" />
@@ -144,6 +150,7 @@
     <None Remove="images\red_note-disabled.png" />
     <None Remove="images\red_note-disabledcheck.png" />
     <None Remove="images\red_note.png" />
+    <None Remove="images\twinrova.png" />
     <None Remove="images\ruby-disabled.png" />
     <None Remove="images\ruby-small.png" />
     <None Remove="images\ruby.png" />
@@ -202,6 +209,7 @@
     <None Remove="images\sword.png" />
     <None Remove="images\sword1.png" />
     <None Remove="images\unknown-small.png" />
+    <None Remove="images\volvagia.png" />
     <None Remove="images\water-small.png" />
     <None Remove="images\water.png" />
     <None Remove="images\watermedallion-disabled.png" />
@@ -300,6 +308,9 @@
     <Content Include="images\arrowsright.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\barinade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\bigkey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -328,6 +339,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\bomb3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bongo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\boomerang-disabled.png">
@@ -432,6 +446,9 @@
     <Content Include="images\free.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\gohma.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\green_note-check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -460,6 +477,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\jabu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\kingdong.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\lens.png">
@@ -495,6 +515,9 @@
     <Content Include="images\mirror.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\morpha.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\orange_note-check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -505,6 +528,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\orange_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\phantomganon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\purple_note-check.png">
@@ -532,6 +558,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\red_note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\twinrova.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\ruby-disabled.png">
@@ -682,6 +711,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\unknown-small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\volvagia.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\water-small.png">

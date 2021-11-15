@@ -22,7 +22,7 @@ namespace ZeldaItemTracker
         const string League = "league";
         const string DDR = "ddr";
         const string S5 = "s5";
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace ZeldaItemTracker
             }
 
             // SET GOAL
-            for(int i = 1; i <= hints.NumberOfGoals; i++)
+            for (int i = 1; i <= hints.NumberOfGoals; i++)
             {
                 var goalBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}", StringComparison.OrdinalIgnoreCase));
                 var goalItemBox = textBoxes.SingleOrDefault(textBox => textBox.Name.Equals($"WOTH{i}ITEMS", StringComparison.OrdinalIgnoreCase));
@@ -260,14 +260,15 @@ namespace ZeldaItemTracker
             // Loop over the entire string until we find a match or get to the end.
             for (int i = 1; i <= textBox.Text.Length; i++)
             {
-                if (Rewards.RewardImageMaps.TryGetValue(textBox.Text.Substring(0, i), out var reward))
+                string fileName = "";
+                if (Rewards.RewardImageMaps.TryGetValue(textBox.Text.Substring(0, i), out fileName) || Bosses.BossImageMaps.TryGetValue(textBox.Text.Substring(0, i), out fileName))
                 {
                     var index = textBox.Name.Last().ToString();
 
                     var relevantItemSlot = Main.Children.OfType<Image>().FirstOrDefault(x => x.Name.Equals($"Goal{index}", StringComparison.OrdinalIgnoreCase));
                     if (relevantItemSlot != null)
                     {
-                        relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{reward}.png", UriKind.Relative));
+                        relevantItemSlot.Source = new BitmapImage(new Uri($@"/images/{fileName}.png", UriKind.Relative));
                     }
 
                     textBox.Text = textBox.Text.Substring(i);
@@ -657,7 +658,7 @@ namespace ZeldaItemTracker
                 var allHints = new HintDistributionSettings().AllHints();
 
                 var relevantHints = allHints.SingleOrDefault(hints => hints.KeyBind == e.Key);
-                if(relevantHints != null)
+                if (relevantHints != null)
                 {
                     hints = relevantHints;
                     SetHints();
