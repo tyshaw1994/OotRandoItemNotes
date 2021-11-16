@@ -42,6 +42,10 @@ I am currently not providing pre-built releases or help with running the tracker
 - Right click on a dungeon reward to un-highlight it
 
 ## Hints
+- Hint distros can be switched between by holding down left control + shift and pressing the corresponding key:
+  - S5/Current Weekly Settings: S
+  - DDR S1: D
+  - League S1: L
 - Location-based hint boxes (WOTH, Goal, Barren) support shortcodes for in-game locations (e.g. gtg to Gerudo Training Ground)
 - Item-based hint boxes (30 Skulls, OOT Song, etc.) support shortcodes for item images (e.g. hs to an image of Hookshot, ks to an image of Kokiri Sword)
 - Sometimes hint boxes don't replace any locations or checks, but they will replace item shortcodes with item images
